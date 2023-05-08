@@ -25,6 +25,8 @@ if (!isset($_SESSION['id_admin'])) {
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
+    <link rel="stylesheet" href="../assets/datatables/css/lib/datatable/dataTables.bootstrap.min.css">
+
     <title>Admin - Puskesmas Lewolaga</title>
 
     <link href="css/app.css" rel="stylesheet">
@@ -51,8 +53,8 @@ if (!isset($_SESSION['id_admin'])) {
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-profile.html">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+                        <a class="sidebar-link" href="?page=kunjungan">
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Kunjungan</span>
                         </a>
                     </li>
 
@@ -305,10 +307,11 @@ if (!isset($_SESSION['id_admin'])) {
                 <div class="container-fluid p-0">
 
                     <?php
+                    include "../System/config.php";
                     if (@$_GET['page'] == 'home' || @$_GET['page'] == '') {
                         include "views/home.php";
-                    } else if (@$_GET['page'] == 'selengkapnya') {
-                        include "views/selengkapnya.php";
+                    } else if (@$_GET['page'] == 'kunjungan') {
+                        include "views/kunjungan.php";
                     }
                     ?>
 
@@ -346,6 +349,23 @@ if (!isset($_SESSION['id_admin'])) {
     </div>
 
     <script src="js/app.js"></script>
+
+    <script src="../assets/datatables/js/lib/data-table/datatables.min.js"></script>
+    <script src="../assets/datatables/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="../assets/datatables/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="../assets/datatables/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="../assets/datatables/js/lib/data-table/jszip.min.js"></script>
+    <script src="../assets/datatables/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="../assets/datatables/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="../assets/datatables/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="../assets/datatables/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="../assets/datatables/js/init/datatables-init.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#bootstrap-data-table-export').DataTable();
+        });
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
