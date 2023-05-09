@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <form action="">
-                    <div class="row mb-5">
+                    <div class="row mb-2">
                         <div class="col-lg-5">
                             <div class="mb-3">
                                 <label class="form-label">Dari :</label>
@@ -28,6 +28,14 @@
                         </div>
                     </div>
                 </form>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="float-left" style="margin-bottom: 40px; float:left;">
+                            <a href="" class="btn btn-md btn-success" data-toggle="modal" data-target="#ModalTambahKunjungan"><i class="fa fa-plus"></i> Tambah Data</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table id="bootstrap-data-table" class="table table-striped table-sm">
                         <thead>
@@ -47,7 +55,7 @@
                         <tbody>
                             <?php
                             $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM kunjungan ORDER BY kunjungan_id DESC");
+                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin WHERE kunjungan.kunjungan_admin = admin.admin_id ORDER BY kunjungan.kunjungan_id DESC");
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
@@ -58,8 +66,19 @@
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
                                     <td><?= $data['kunjungan_status']; ?></td>
-                                    <td><?= $data['kunjungan_admin']; ?></td>
-                                    <td><?= $data['kunjungan_paramedis']; ?></td>
+                                    <td><?= $data['admin_nama']; ?></td>
+                                    <td>
+                                        <?php
+                                        $idparam = $data['kunjungan_paramedis'];
+                                        if ($idparam == 0) {
+                                            echo "-";
+                                        } else {
+                                            $sqlparam = mysqli_query($con, "SELECT * FROM paramedis WHERE paramedis_id = '$idparam' LIMIT 1");
+                                            $dataparam = mysqli_fetch_assoc($sqlparam);
+                                            echo $dataparam['paramedis_nama'];
+                                        }
+                                        ?>
+                                    </td>
                                     <td>
                                         <?php
                                         //if ($data['kunjungan_status'] == 'Telah Diperiksa') {
@@ -68,7 +87,7 @@
                                         <?php
                                         //}
                                         ?>
-                                        <a href="" class="text-info"><i class="fas fa-edit fa-md"></i></a>
+                                        <a href="" class="text-info"><i class="fa fa-edit fa-md"></i></a>
                                         <!-- <a href="" onclick="return confirm('Yakin ingin menghapus data ini ???')" class="text-danger"><i class="fas fa-trash fa-md"></i></a> -->
                                     </td>
                                 </tr>
@@ -82,3 +101,64 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL TAMBAH -->
+<div class="modal fade" id="ModalTambahKunjungan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kunjungan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nama Pasien</label>
+                        <input class="form-control form-control-lg" type="text" name="kunjungan_pasien_nama" placeholder="Nama Lengkap..." required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Jenis Kelamin</label>
+                        <select class="form-control form-control-lg" name="kunjungan_pasien_jk" required>
+                            <option value="">-- Pilih Jenis Kelamin --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Umur Pasien</label>
+                        <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" placeholder="Umur..." value="18" required />
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" name="simpan" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END MODAL TAMBAH -->
+
+<?php
+if (@$_POST['simpan']) {
+    $kunjungan_pasien_nama = $_POST['kunjungan_pasien_nama'];
+    $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
+    $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
+    $kunjungan_tanggal = date('Y-m-d');
+    $kunjungan_jam = date('h:i:sa');
+    $kunjungan_status = 'Belum Diperiksa';
+    $kunjungan_admin = $idadmin;
+    $kunjungan_paramedis = '0';
+
+    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
+
+    if ($sql) {
+        echo "<script>alert('Data berhasil ditambah !');window.location='?page=kunjungan';</script>";
+    } else {
+        echo "<script>alert('Data gagal ditambah !');window.location='?page=kunjungan';</script>";
+    }
+}
+?>
