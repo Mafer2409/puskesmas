@@ -56,13 +56,23 @@ if (!isset($_SESSION['id_admin'])) {
                         </a>
                     </li>
 
+                    <li class="sidebar-header">
+                        Kunjungan
+                    </li>
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="?page=kunjungan">
-                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Kunjungan</span>
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Kunjungan Hari Ini</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
+                        <a class="sidebar-link" href="?page=kunjungan-all">
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Semua Kunjungan</span>
+                        </a>
+                    </li>
+
+                    <!-- <li class="sidebar-item">
                         <a class="sidebar-link" href="pages-sign-in.html">
                             <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
                         </a>
@@ -128,7 +138,7 @@ if (!isset($_SESSION['id_admin'])) {
                         <a class="sidebar-link" href="maps-google.html">
                             <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <!-- <div class="sidebar-cta">
@@ -316,6 +326,8 @@ if (!isset($_SESSION['id_admin'])) {
                         include "views/home.php";
                     } else if (@$_GET['page'] == 'kunjungan') {
                         include "views/kunjungan.php";
+                    } else if (@$_GET['page'] == 'kunjungan-all') {
+                        include "views/kunjungan-all.php";
                     }
                     ?>
 

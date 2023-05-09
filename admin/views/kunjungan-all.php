@@ -1,13 +1,13 @@
-<h1 class="h3 mb-3">Data Kunjungan Hari Ini</h1>
+<h1 class="h3 mb-3">Semua Data Kunjungan</h1>
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Data Kunjungan Hari Ini</h5>
+                <h5 class="card-title mb-0">Semua Data Kunjungan</h5>
             </div>
             <div class="card-body">
-                <!-- <form action="">
+                <form action="">
                     <div class="row mb-2">
                         <div class="col-lg-5">
                             <div class="mb-3">
@@ -27,12 +27,15 @@
                             </div>
                         </div>
                     </div>
-                </form> -->
+                </form>
 
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="float-left" style="margin-bottom: 40px; float:left;">
+                    <div class="row" style="margin-bottom: 40px;">
+                        <div class="col-lg-6" style="float:left">
                             <a href="" class="btn btn-md btn-success" data-toggle="modal" data-target="#ModalTambahKunjungan"><i class="fa fa-plus"></i> Tambah Data</a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="" class="btn btn-md btn-info" style="float:right"><i class="fa fa-print"></i> Cetak Data</a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +59,7 @@
                             <?php
                             $today = date('Y-m-d');
                             $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin WHERE kunjungan.kunjungan_admin = admin.admin_id AND kunjungan.kunjungan_tanggal = '$today' ORDER BY kunjungan.kunjungan_id DESC");
+                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin WHERE kunjungan.kunjungan_admin = admin.admin_id ORDER BY kunjungan.kunjungan_id DESC");
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
