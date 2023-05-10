@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Bulan Mei 2023 pada 16.02
+-- Waktu pembuatan: 10 Bulan Mei 2023 pada 19.05
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -80,7 +80,8 @@ CREATE TABLE `kunjungan` (
 INSERT INTO `kunjungan` (`kunjungan_id`, `kunjungan_pasien_nama`, `kunjungan_pasien_jk`, `kunjungan_pasien_umur`, `kunjungan_tanggal`, `kunjungan_jam`, `kunjungan_status`, `kunjungan_admin`, `kunjungan_paramedis`) VALUES
 (1, 'Tess Kunjungan', 'Laki-laki', 18, '2023-05-10', '01:09:01am', 'Belum Diperiksa', 1, 0),
 (2, 'Tes kunjungan 2', 'Laki-laki', 23, '2023-05-10', '01:50:09pm', 'Belum Diperiksa', 1, 0),
-(3, 'Ts kunjungan 3', 'Perempuan', 20, '2023-05-10', '02:55:18pm', 'Belum Diperiksa', 1, 0);
+(3, 'Ts kunjungan 3', 'Perempuan', 20, '2023-05-10', '02:55:18pm', 'Telah Diperiksa', 1, 1),
+(4, 'Tes pasien 4', 'Laki-laki', 18, '2023-05-11', '12:49:46 am', 'Telah Diperiksa', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -116,6 +117,14 @@ CREATE TABLE `penanganan` (
   `penanganan_pengobatan` text NOT NULL,
   `penanganan_ket` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `penanganan`
+--
+
+INSERT INTO `penanganan` (`penanganan_id`, `penanganan_kunjungan`, `penanganan_keluhan`, `penanganan_kesimpulan`, `penanganan_pengobatan`, `penanganan_ket`) VALUES
+(1, 3, 'Batuk, Kerongkongan gatal', 'Pilek', 'Paracetamol 1 strip (3x1)\r\nDemacolin 1 strip (3x1)', '-'),
+(2, 4, 'Hidung tersumbat, sakit kepala, pusing', 'Pilek', 'Paracetamol 1 strip (3x1)', '--');
 
 --
 -- Indexes for dumped tables
@@ -171,7 +180,7 @@ ALTER TABLE `kepala`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `paramedis`
@@ -183,7 +192,7 @@ ALTER TABLE `paramedis`
 -- AUTO_INCREMENT untuk tabel `penanganan`
 --
 ALTER TABLE `penanganan`
-  MODIFY `penanganan_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `penanganan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

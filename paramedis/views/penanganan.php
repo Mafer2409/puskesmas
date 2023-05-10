@@ -58,3 +58,28 @@ $datakunjungan = mysqli_fetch_assoc($sqlkunjungan);
         </div>
     </div>
 </div>
+
+<?php
+if (@$_POST['simpan']) {
+    $penanganan_kunjungan = $id;
+    $kunjungan_paramedis = $idparamedis;
+    $penanganan_keluhan = $_POST['penanganan_keluhan'];
+    $penanganan_kesimpulan = $_POST['penanganan_kesimpulan'];
+    $penanganan_pengobatan = $_POST['penanganan_pengobatan'];
+    $penanganan_ket = $_POST['penanganan_ket'];
+
+    $sqlpenanganan = mysqli_query($con, "INSERT INTO penanganan VALUES('', '$penanganan_kunjungan', '$penanganan_keluhan', '$penanganan_kesimpulan', '$penanganan_pengobatan', '$penanganan_ket')");
+
+    if ($sqlpenanganan) {
+        $sql = mysqli_query($con, "UPDATE kunjungan SET kunjungan_status = 'Telah Diperiksa', kunjungan_paramedis = '$kunjungan_paramedis' WHERE kunjungan_id = '$penanganan_kunjungan'");
+
+        if ($sql) {
+            echo "<script>alert('Data berhasil ditambah !');window.location='?page=kunjungan';</script>";
+        } else {
+            echo "<script>alert('Data kunjungan gagal diubah !');window.location='?page=kunjungan';</script>";
+        }
+    } else {
+        echo "<script>alert('Data penangana gagal ditambah !');window.location='?page=kunjungan';</script>";
+    }
+}
+?>
