@@ -328,6 +328,8 @@ if (!isset($_SESSION['id_admin'])) {
                         include "views/kunjungan.php";
                     } else if (@$_GET['page'] == 'kunjungan-all') {
                         include "views/kunjungan-all.php";
+                    } else if (@$_GET['page'] == 'kunjungan-cari') {
+                        include "views/kunjungan-cari.php";
                     }
                     ?>
 

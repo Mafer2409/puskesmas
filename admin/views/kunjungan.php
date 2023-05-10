@@ -82,13 +82,16 @@
                                     </td>
                                     <td>
                                         <?php
-                                        //if ($data['kunjungan_status'] == 'Telah Diperiksa') {
+                                        if ($data['kunjungan_status'] == 'Telah Diperiksa') {
                                         ?>
-                                        <!-- <a href="" class="text-primary"><i class="fas fa-info-circle fa-md"></i></a> -->
+                                            <a href="" class="text-primary"><i class="fas fa-info-circle fa-md"></i></a>
                                         <?php
-                                        //}
+                                        } else {
                                         ?>
-                                        <a href="" class="text-info"><i class="fa fa-edit fa-md"></i></a>
+                                            <a href="" class="text-info"><i class="fa fa-edit fa-md"></i></a>
+                                        <?php
+                                        }
+                                        ?>
                                         <!-- <a href="" onclick="return confirm('Yakin ingin menghapus data ini ???')" class="text-danger"><i class="fas fa-trash fa-md"></i></a> -->
                                     </td>
                                 </tr>
@@ -149,7 +152,7 @@ if (@$_POST['simpan']) {
     $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
     $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
     $kunjungan_tanggal = date('Y-m-d');
-    $kunjungan_jam = date('h:i:sa');
+    $kunjungan_jam = date('h:i:s a');
     $kunjungan_status = 'Belum Diperiksa';
     $kunjungan_admin = $idadmin;
     $kunjungan_paramedis = '0';

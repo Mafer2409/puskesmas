@@ -1,10 +1,15 @@
-<h1 class="h3 mb-3">Semua Data Kunjungan</h1>
+<?php
+$dari = $_POST['dari'];
+$hingga = $_POST['hingga'];
+?>
+
+<h1 class="h3 mb-3">Data Kunjungan</h1>
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Semua Data Kunjungan</h5>
+                <h5 class="card-title mb-0">Dari : <?= $dari ?> - Hingga : <?= $hingga ?></h5>
             </div>
             <div class="card-body">
                 <form action="?page=kunjungan-cari" method="post">
@@ -35,7 +40,7 @@
                             <a href="" class="btn btn-md btn-success" data-toggle="modal" data-target="#ModalTambahKunjungan"><i class="fa fa-plus"></i> Tambah Data</a>
                         </div>
                         <div class="col-lg-6">
-                            <a href="" class="btn btn-md btn-info" style="float:right"><i class="fa fa-print"></i> Cetak Data</a>
+                            <a href="../report/report-admin/report-kunjungan-cari.php?dari=<?= $dari ?>&hingga=<?= $hingga ?>" target="_blank" class="btn btn-md btn-info" style="float:right"><i class="fa fa-print"></i> Cetak Data Hasil Pencarian</a>
                         </div>
                     </div>
                 </div>
@@ -59,7 +64,7 @@
                             <?php
                             $today = date('Y-m-d');
                             $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin WHERE kunjungan.kunjungan_admin = admin.admin_id ORDER BY kunjungan.kunjungan_id DESC");
+                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin WHERE kunjungan.kunjungan_admin = admin.admin_id AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
@@ -85,16 +90,13 @@
                                     </td>
                                     <td>
                                         <?php
-                                        if ($data['kunjungan_status'] == 'Telah Diperiksa') {
+                                        //if ($data['kunjungan_status'] == 'Telah Diperiksa') {
                                         ?>
-                                            <a href="" class="text-primary"><i class="fas fa-info-circle fa-md"></i></a>
+                                        <!-- <a href="" class="text-primary"><i class="fas fa-info-circle fa-md"></i></a> -->
                                         <?php
-                                        } else {
+                                        //}
                                         ?>
-                                            <a href="" class="text-info"><i class="fa fa-edit fa-md"></i></a>
-                                        <?php
-                                        }
-                                        ?>
+                                        <a href="" class="text-info"><i class="fa fa-edit fa-md"></i></a>
                                         <!-- <a href="" onclick="return confirm('Yakin ingin menghapus data ini ???')" class="text-danger"><i class="fas fa-trash fa-md"></i></a> -->
                                     </td>
                                 </tr>
@@ -168,5 +170,4 @@ if (@$_POST['simpan']) {
         echo "<script>alert('Data gagal ditambah !');window.location='?page=kunjungan';</script>";
     }
 }
-
 ?>
