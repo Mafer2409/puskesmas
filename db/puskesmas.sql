@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Bulan Mei 2023 pada 19.16
+-- Waktu pembuatan: 10 Bulan Mei 2023 pada 16.02
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -73,6 +73,15 @@ CREATE TABLE `kunjungan` (
   `kunjungan_paramedis` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `kunjungan`
+--
+
+INSERT INTO `kunjungan` (`kunjungan_id`, `kunjungan_pasien_nama`, `kunjungan_pasien_jk`, `kunjungan_pasien_umur`, `kunjungan_tanggal`, `kunjungan_jam`, `kunjungan_status`, `kunjungan_admin`, `kunjungan_paramedis`) VALUES
+(1, 'Tess Kunjungan', 'Laki-laki', 18, '2023-05-10', '01:09:01am', 'Belum Diperiksa', 1, 0),
+(2, 'Tes kunjungan 2', 'Laki-laki', 23, '2023-05-10', '01:50:09pm', 'Belum Diperiksa', 1, 0),
+(3, 'Ts kunjungan 3', 'Perempuan', 20, '2023-05-10', '02:55:18pm', 'Belum Diperiksa', 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -84,6 +93,28 @@ CREATE TABLE `paramedis` (
   `paramedis_nama` varchar(255) NOT NULL,
   `paramedis_email` varchar(255) NOT NULL,
   `paramedis_password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `paramedis`
+--
+
+INSERT INTO `paramedis` (`paramedis_id`, `paramedis_nama`, `paramedis_email`, `paramedis_password`) VALUES
+(1, 'Paramedis 1', 'paramedis1@mail.com', '2d0140635e1d6a42f6631b12ebdf84ad');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `penanganan`
+--
+
+CREATE TABLE `penanganan` (
+  `penanganan_id` int(11) NOT NULL,
+  `penanganan_kunjungan` int(11) NOT NULL,
+  `penanganan_keluhan` text NOT NULL,
+  `penanganan_kesimpulan` text NOT NULL,
+  `penanganan_pengobatan` text NOT NULL,
+  `penanganan_ket` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -115,6 +146,12 @@ ALTER TABLE `paramedis`
   ADD PRIMARY KEY (`paramedis_id`);
 
 --
+-- Indeks untuk tabel `penanganan`
+--
+ALTER TABLE `penanganan`
+  ADD PRIMARY KEY (`penanganan_id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -134,13 +171,19 @@ ALTER TABLE `kepala`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `paramedis`
 --
 ALTER TABLE `paramedis`
-  MODIFY `paramedis_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `paramedis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `penanganan`
+--
+ALTER TABLE `penanganan`
+  MODIFY `penanganan_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
