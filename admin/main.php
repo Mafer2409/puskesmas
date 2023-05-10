@@ -72,6 +72,17 @@ if (!isset($_SESSION['id_admin'])) {
                         </a>
                     </li>
 
+
+                    <li class="sidebar-header">
+                        Paramedis
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="?page=paramedis">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Paramedis</span>
+                        </a>
+                    </li>
+
                     <!-- <li class="sidebar-item">
                         <a class="sidebar-link" href="pages-sign-in.html">
                             <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
@@ -330,6 +341,10 @@ if (!isset($_SESSION['id_admin'])) {
                         include "views/kunjungan-all.php";
                     } else if (@$_GET['page'] == 'kunjungan-cari') {
                         include "views/kunjungan-cari.php";
+                    } else if (@$_GET['page'] == 'kunjungan-detail') {
+                        include "views/kunjungan-detail.php";
+                    } else if (@$_GET['page'] == 'paramedis') {
+                        include "views/paramedis.php";
                     }
                     ?>
 
