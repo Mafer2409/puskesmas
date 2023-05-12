@@ -69,7 +69,7 @@ $data = mysqli_fetch_assoc($sql);
                                     <td><?= $data['penanganan_kesimpulan'] ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Pengobata </td>
+                                    <td>Pengobatan</td>
                                     <td>:</td>
                                     <td><?= $data['penanganan_pengobatan'] ?></td>
                                 </tr>
