@@ -87,7 +87,7 @@
                                         <?php
                                         if ($data['kunjungan_status'] == 'Telah Diperiksa') {
                                         ?>
-                                            <a href="" class="text-primary"><i class="fas fa-info-circle fa-md"></i></a>
+                                            <a href="" class="text-primary"><i class="fa fa-info-circle fa-md"></i></a>
                                         <?php
                                         } else {
                                         ?>
