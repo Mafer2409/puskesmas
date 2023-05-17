@@ -56,7 +56,7 @@ while ($data = mysqli_fetch_assoc($sql)) {
     } else {
         $sqlparam = mysqli_query($con, "SELECT * FROM paramedis WHERE paramedis_id = '$idparam' LIMIT 1");
         $dataparam = mysqli_fetch_assoc($sqlparam);
-        $pdf->Cell(55, 5, $data['paramedis_nama'], 1, 1);
+        $pdf->Cell(55, 5, $dataparam['paramedis_nama'], 1, 1);
     }
 }
 

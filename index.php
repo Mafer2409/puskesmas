@@ -33,7 +33,7 @@ session_destroy();
                     <div class="d-table-cell align-middle">
 
                         <div class="text-center mt-4">
-                            <h1 class="h2">Haii! Welcome back.</h1>
+                            <h1 class="h2">Haii! Welcome back...</h1>
                             <p class="lead">
                                 Sign in to your account to continue
                             </p>
