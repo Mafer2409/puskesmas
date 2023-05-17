@@ -90,13 +90,16 @@ $hingga = $_POST['hingga'];
                                     </td>
                                     <td>
                                         <?php
-                                        //if ($data['kunjungan_status'] == 'Telah Diperiksa') {
+                                        if ($data['kunjungan_status'] == 'Telah Diperiksa') {
                                         ?>
-                                        <!-- <a href="" class="text-primary"><i class="fas fa-info-circle fa-md"></i></a> -->
+                                            <a href="?page=kunjungan-detail&id=<?= $data['kunjungan_id'] ?>" class="text-primary"><i class="fa fa-info-circle fa-md"></i></a>
                                         <?php
-                                        //}
+                                        } else {
                                         ?>
-                                        <a href="" class="text-info"><i class="fa fa-edit fa-md"></i></a>
+                                            <a href="" class="text-info" data-toggle="modal" data-target="#ModalEditKunjungan<?= $data['kunjungan_id'] ?>"><i class="fa fa-edit fa-md"></i></a>
+                                        <?php
+                                        }
+                                        ?>
                                         <!-- <a href="" onclick="return confirm('Yakin ingin menghapus data ini ???')" class="text-danger"><i class="fas fa-trash fa-md"></i></a> -->
                                     </td>
                                 </tr>

@@ -62,7 +62,7 @@
                                         <?php
                                         if ($data['kunjungan_status'] == 'Telah Diperiksa') {
                                         ?>
-                                            <a href="?page=kunjungan-detail&id=<?= $data['kunjungan_id'] ?>" class="text-primary"><i class="fas fa-info-circle fa-md"></i></a>
+                                            <a href="?page=kunjungan-detail&id=<?= $data['kunjungan_id'] ?>" class="text-primary"><i class="fa fa-info-circle fa-md"></i></a>
                                         <?php
                                         } else {
                                         ?>
