@@ -1,102 +1,10 @@
 <h1 class="h3 mb-3"><strong>Dashboard</strong></h1>
 
 <div class="row">
-    <div class="col-xl-6 col-xxl-5 d-flex">
-        <div class="w-100">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col mt-0">
-                                    <h5 class="card-title">Sales</h5>
-                                </div>
-
-                                <div class="col-auto">
-                                    <div class="stat text-primary">
-                                        <i class="align-middle" data-feather="truck"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h1 class="mt-1 mb-3">2.382</h1>
-                            <div class="mb-0">
-                                <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-                                <span class="text-muted">Since last week</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col mt-0">
-                                    <h5 class="card-title">Visitors</h5>
-                                </div>
-
-                                <div class="col-auto">
-                                    <div class="stat text-primary">
-                                        <i class="align-middle" data-feather="users"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h1 class="mt-1 mb-3">14.212</h1>
-                            <div class="mb-0">
-                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-                                <span class="text-muted">Since last week</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col mt-0">
-                                    <h5 class="card-title">Earnings</h5>
-                                </div>
-
-                                <div class="col-auto">
-                                    <div class="stat text-primary">
-                                        <i class="align-middle" data-feather="dollar-sign"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h1 class="mt-1 mb-3">$21.300</h1>
-                            <div class="mb-0">
-                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-                                <span class="text-muted">Since last week</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col mt-0">
-                                    <h5 class="card-title">Orders</h5>
-                                </div>
-
-                                <div class="col-auto">
-                                    <div class="stat text-primary">
-                                        <i class="align-middle" data-feather="shopping-cart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h1 class="mt-1 mb-3">64</h1>
-                            <div class="mb-0">
-                                <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-                                <span class="text-muted">Since last week</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-6 col-xxl-7">
+    <div class="col-lg-8">
         <div class="card flex-fill w-100">
             <div class="card-header">
-
-                <h5 class="card-title mb-0">Recent Movement</h5>
+                <h5 class="card-title mb-0">Kunjungan Bulanan - Tahun <?= date('Y') ?></h5>
             </div>
             <div class="card-body py-3">
                 <div class="chart chart-sm">
@@ -105,14 +13,10 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
+    <div class="col-lg-4">
         <div class="card flex-fill w-100">
             <div class="card-header">
-
-                <h5 class="card-title mb-0">Browser Usage</h5>
+                <h5 class="card-title mb-0">Kunjungan - Tahun <?= date('Y') ?></h5>
             </div>
             <div class="card-body d-flex">
                 <div class="align-self-center w-100">
@@ -121,20 +25,23 @@
                             <canvas id="chartjs-dashboard-pie"></canvas>
                         </div>
                     </div>
+                    <?php
+                    $tahunini = date('Y');
+                    $sqljklaki = mysqli_query($con, "SELECT * FROM kunjungan WHERE kunjungan_pasien_jk = 'Laki-laki' AND YEAR(kunjungan_tanggal) = '$tahunini'");
+                    $numlaki = mysqli_num_rows($sqljklaki);
 
+                    $sqljkperempuan = mysqli_query($con, "SELECT * FROM kunjungan WHERE kunjungan_pasien_jk = 'Perempuan' AND YEAR(kunjungan_tanggal) = '$tahunini'");
+                    $numperempuan = mysqli_num_rows($sqljkperempuan);
+                    ?>
                     <table class="table mb-0">
                         <tbody>
                             <tr>
-                                <td>Chrome</td>
-                                <td class="text-end">4306</td>
+                                <td>Laki-laki</td>
+                                <td class="text-end"><?= $numlaki ?></td>
                             </tr>
                             <tr>
-                                <td>Firefox</td>
-                                <td class="text-end">3801</td>
-                            </tr>
-                            <tr>
-                                <td>IE</td>
-                                <td class="text-end">1689</td>
+                                <td>Perempuan</td>
+                                <td class="text-end"><?= $numperempuan ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -142,123 +49,138 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
-        <div class="card flex-fill w-100">
-            <div class="card-header">
-
-                <h5 class="card-title mb-0">Real-Time</h5>
-            </div>
-            <div class="card-body px-4">
-                <div id="world_map" style="height:350px;"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
-        <div class="card flex-fill">
-            <div class="card-header">
-
-                <h5 class="card-title mb-0">Calendar</h5>
-            </div>
-            <div class="card-body d-flex">
-                <div class="align-self-center w-100">
-                    <div class="chart">
-                        <div id="datetimepicker-dashboard"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
-<div class="row">
-    <div class="col-12 col-lg-8 col-xxl-9 d-flex">
-        <div class="card flex-fill">
-            <div class="card-header">
+<!-- GRAFIK KUNJUNGAN BULANAN -->
+<?php
+$thisyear = date('Y');
+$wilayah4 = mysqli_query($con, "SELECT MONTH(kunjungan_tanggal) as bulan FROM kunjungan WHERE YEAR(kunjungan_tanggal) = '$thisyear' GROUP BY MONTH(kunjungan_tanggal)");
+while ($row4 = mysqli_fetch_array($wilayah4)) {
+    //$nama_wilayah4[] = $row4['bulan'];
 
-                <h5 class="card-title mb-0">Latest Projects</h5>
-            </div>
-            <table class="table table-hover my-0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th class="d-none d-xl-table-cell">Start Date</th>
-                        <th class="d-none d-xl-table-cell">End Date</th>
-                        <th>Status</th>
-                        <th class="d-none d-md-table-cell">Assignee</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Project Apollo</td>
-                        <td class="d-none d-xl-table-cell">01/01/2021</td>
-                        <td class="d-none d-xl-table-cell">31/06/2021</td>
-                        <td><span class="badge bg-success">Done</span></td>
-                        <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                    </tr>
-                    <tr>
-                        <td>Project Fireball</td>
-                        <td class="d-none d-xl-table-cell">01/01/2021</td>
-                        <td class="d-none d-xl-table-cell">31/06/2021</td>
-                        <td><span class="badge bg-danger">Cancelled</span></td>
-                        <td class="d-none d-md-table-cell">William Harris</td>
-                    </tr>
-                    <tr>
-                        <td>Project Hades</td>
-                        <td class="d-none d-xl-table-cell">01/01/2021</td>
-                        <td class="d-none d-xl-table-cell">31/06/2021</td>
-                        <td><span class="badge bg-success">Done</span></td>
-                        <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                    </tr>
-                    <tr>
-                        <td>Project Nitro</td>
-                        <td class="d-none d-xl-table-cell">01/01/2021</td>
-                        <td class="d-none d-xl-table-cell">31/06/2021</td>
-                        <td><span class="badge bg-warning">In progress</span></td>
-                        <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                    </tr>
-                    <tr>
-                        <td>Project Phoenix</td>
-                        <td class="d-none d-xl-table-cell">01/01/2021</td>
-                        <td class="d-none d-xl-table-cell">31/06/2021</td>
-                        <td><span class="badge bg-success">Done</span></td>
-                        <td class="d-none d-md-table-cell">William Harris</td>
-                    </tr>
-                    <tr>
-                        <td>Project X</td>
-                        <td class="d-none d-xl-table-cell">01/01/2021</td>
-                        <td class="d-none d-xl-table-cell">31/06/2021</td>
-                        <td><span class="badge bg-success">Done</span></td>
-                        <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                    </tr>
-                    <tr>
-                        <td>Project Romeo</td>
-                        <td class="d-none d-xl-table-cell">01/01/2021</td>
-                        <td class="d-none d-xl-table-cell">31/06/2021</td>
-                        <td><span class="badge bg-success">Done</span></td>
-                        <td class="d-none d-md-table-cell">Christina Mason</td>
-                    </tr>
-                    <tr>
-                        <td>Project Wombat</td>
-                        <td class="d-none d-xl-table-cell">01/01/2021</td>
-                        <td class="d-none d-xl-table-cell">31/06/2021</td>
-                        <td><span class="badge bg-warning">In progress</span></td>
-                        <td class="d-none d-md-table-cell">William Harris</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col-12 col-lg-4 col-xxl-3 d-flex">
-        <div class="card flex-fill w-100">
-            <div class="card-header">
+    if ($row4['bulan'] == '01') {
+        $nama_wilayah4[] = 'Januari';
+    } elseif ($row4['bulan'] == '02') {
+        $nama_wilayah4[] = 'Februari';
+    } elseif ($row4['bulan'] == '03') {
+        $nama_wilayah4[] = 'Maret';
+    } elseif ($row4['bulan'] == '04') {
+        $nama_wilayah4[] = 'April';
+    } elseif ($row4['bulan'] == '05') {
+        $nama_wilayah4[] = 'Mei';
+    } elseif ($row4['bulan'] == '06') {
+        $nama_wilayah4[] = 'Juni';
+    } elseif ($row4['bulan'] == '07') {
+        $nama_wilayah4[] = 'Juli';
+    } elseif ($row4['bulan'] == '08') {
+        $nama_wilayah4[] = 'Agustus';
+    } elseif ($row4['bulan'] == '09') {
+        $nama_wilayah4[] = 'September';
+    } elseif ($row4['bulan'] == '10') {
+        $nama_wilayah4[] = 'Oktober';
+    } elseif ($row4['bulan'] == '11') {
+        $nama_wilayah4[] = 'November';
+    } else {
+        $nama_wilayah4[] = 'Desember';
+    }
 
-                <h5 class="card-title mb-0">Monthly Sales</h5>
-            </div>
-            <div class="card-body d-flex w-100">
-                <div class="align-self-center chart chart-lg">
-                    <canvas id="chartjs-dashboard-bar"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    $query4 = mysqli_query($con, "SELECT * FROM kunjungan WHERE MONTH(kunjungan_tanggal) ='" . $row4['bulan'] . "' AND YEAR(kunjungan_tanggal) = '$thisyear'");
+    $jumlah4[] = mysqli_num_rows($query4);
+}
+?>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+        var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+        gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+        gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+        // Line chart
+        new Chart(document.getElementById("chartjs-dashboard-line"), {
+            type: "line",
+            data: {
+                labels: <?php echo json_encode($nama_wilayah4); ?>,
+                datasets: [{
+                    label: "Kunjungan",
+                    fill: true,
+                    backgroundColor: gradient,
+                    borderColor: window.theme.primary,
+                    data: <?php echo json_encode($jumlah4); ?>,
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    intersect: false
+                },
+                hover: {
+                    intersect: true
+                },
+                plugins: {
+                    filler: {
+                        propagate: false
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        reverse: true,
+                        gridLines: {
+                            color: "rgba(0,0,0,0.0)"
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            stepSize: 1000
+                        },
+                        display: true,
+                        borderDash: [3, 3],
+                        gridLines: {
+                            color: "rgba(0,0,0,0.0)"
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+
+
+<script>
+    <?php
+    $thisyear = date('Y');
+    $sqlgender = mysqli_query($con, "SELECT * FROM kunjungan WHERE YEAR(kunjungan_tanggal) = '$thisyear' GROUP BY kunjungan_pasien_jk");
+    while ($gender = mysqli_fetch_array($sqlgender)) {
+        $nama_gender[] = $gender['kunjungan_pasien_jk'];
+        $sqljumlahgender = mysqli_query($con, "SELECT * FROM kunjungan WHERE kunjungan_pasien_jk ='" . $gender['kunjungan_pasien_jk'] . "' AND YEAR(kunjungan_tanggal) = '$thisyear'");
+        $jumlahgender[] = mysqli_num_rows($sqljumlahgender);
+    }
+    ?>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Pie chart
+        new Chart(document.getElementById("chartjs-dashboard-pie"), {
+            type: "pie",
+            data: {
+                labels: <?php echo json_encode($nama_gender); ?>,
+                datasets: [{
+                    data: <?php echo json_encode($jumlahgender); ?>,
+                    backgroundColor: [
+                        window.theme.primary,
+                        window.theme.warning,
+                        window.theme.danger
+                    ],
+                    borderWidth: 5
+                }]
+            },
+            options: {
+                responsive: !window.MSInputMethodContext,
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 75
+            }
+        });
+    });
+</script>
