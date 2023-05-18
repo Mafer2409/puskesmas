@@ -1,11 +1,11 @@
 <?php
 session_start();
 include '../System/config.php';
-if (!isset($_SESSION['id_admin'])) {
+if (!isset($_SESSION['id_kepala'])) {
     echo "<script>alert('Anda harus login terlebih dahulu !');window.location='../index.php';</script>";
 } else {
-    $idadmin = $_SESSION['id_admin'];
-    $namaadmin = $_SESSION['nama_admin'];
+    $idkepala = $_SESSION['id_kepala'];
+    $namakepala = $_SESSION['nama_kepala'];
 }
 ?>
 
@@ -31,7 +31,7 @@ if (!isset($_SESSION['id_admin'])) {
 
     <link rel="stylesheet" href="../assets/datatables/css/lib/datatable/dataTables.bootstrap.min.css">
 
-    <title>Admin - Puskesmas Lewolaga</title>
+    <title>Kepala - Puskesmas Lewolaga</title>
 
     <link href="css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@ if (!isset($_SESSION['id_admin'])) {
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
                 <a class="sidebar-brand" href="?page=home">
-                    <span class="align-middle">Administrator</span>
+                    <span class="align-middle">Kepala Puskesmas</span>
                 </a>
 
                 <ul class="sidebar-nav">
@@ -72,6 +72,16 @@ if (!isset($_SESSION['id_admin'])) {
                         </a>
                     </li>
 
+
+                    <li class="sidebar-header">
+                        Admin
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="?page=admin">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Admin</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-header">
                         Paramedis
@@ -168,7 +178,7 @@ if (!isset($_SESSION['id_admin'])) {
                             </a>
 
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                <img src="img/logo/puskesmas-logo.png" class="avatar img-fluid rounded me-1" /> <span class="text-dark"><?= $_SESSION['nama_admin'] ?></span>
+                                <img src="img/logo/puskesmas-logo.png" class="avatar img-fluid rounded me-1" /> <span class="text-dark"><?= $_SESSION['nama_kepala'] ?></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a> -->
@@ -201,6 +211,12 @@ if (!isset($_SESSION['id_admin'])) {
                         include "views/kunjungan-detail.php";
                     } else if (@$_GET['page'] == 'paramedis') {
                         include "views/paramedis.php";
+                    } else if (@$_GET['page'] == 'admin') {
+                        include "views/admin.php";
+                    } else if (@$_GET['page'] == 'hapus-admin') {
+                        include "views/hapus-admin.php";
+                    } else if (@$_GET['page'] == 'hapus-paramedis') {
+                        include "views/hapus-paramedis.php";
                     }
                     ?>
 

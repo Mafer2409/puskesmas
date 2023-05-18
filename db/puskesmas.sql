@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Bulan Mei 2023 pada 19.05
+-- Waktu pembuatan: 18 Bulan Mei 2023 pada 13.53
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -55,6 +55,13 @@ CREATE TABLE `kepala` (
   `kepala_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `kepala`
+--
+
+INSERT INTO `kepala` (`kepala_id`, `kepala_nama`, `kepala_email`, `kepala_password`) VALUES
+(1, 'Kepala Kantor 1', 'kepala1@mail.com', 'da21279387f71ca8e09432cdea87a553');
+
 -- --------------------------------------------------------
 
 --
@@ -79,8 +86,8 @@ CREATE TABLE `kunjungan` (
 
 INSERT INTO `kunjungan` (`kunjungan_id`, `kunjungan_pasien_nama`, `kunjungan_pasien_jk`, `kunjungan_pasien_umur`, `kunjungan_tanggal`, `kunjungan_jam`, `kunjungan_status`, `kunjungan_admin`, `kunjungan_paramedis`) VALUES
 (1, 'Tess Kunjungan', 'Laki-laki', 18, '2023-05-10', '01:09:01am', 'Belum Diperiksa', 1, 0),
-(2, 'Tes kunjungan 2', 'Laki-laki', 23, '2023-05-10', '01:50:09pm', 'Belum Diperiksa', 1, 0),
-(3, 'Ts kunjungan 3', 'Perempuan', 20, '2023-05-10', '02:55:18pm', 'Telah Diperiksa', 1, 1),
+(2, 'Tes kunjungan 2', 'Laki-laki', 23, '2023-03-10', '01:50:09pm', 'Belum Diperiksa', 1, 0),
+(3, 'Ts kunjungan 3', 'Perempuan', 20, '2023-04-10', '02:55:18pm', 'Telah Diperiksa', 1, 1),
 (4, 'Tes pasien 4', 'Laki-laki', 18, '2023-05-11', '12:49:46 am', 'Telah Diperiksa', 1, 1);
 
 -- --------------------------------------------------------
@@ -168,13 +175,13 @@ ALTER TABLE `penanganan`
 -- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `kepala`
 --
 ALTER TABLE `kepala`
-  MODIFY `kepala_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kepala_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `kunjungan`
@@ -186,7 +193,7 @@ ALTER TABLE `kunjungan`
 -- AUTO_INCREMENT untuk tabel `paramedis`
 --
 ALTER TABLE `paramedis`
-  MODIFY `paramedis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `paramedis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `penanganan`
