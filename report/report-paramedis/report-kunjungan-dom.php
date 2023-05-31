@@ -13,7 +13,7 @@ $hingga = $_GET['hingga'];
 
 $sql = mysqli_query($con, "SELECT * FROM kunjungan, penanganan WHERE kunjungan.kunjungan_id = penanganan.penanganan_kunjungan AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
 
-$html = '<center><h3 style="font-family:sans-serif;">Laporan Kunjungan</h3></center><center><h5 style="font-family: Arial, Helvetica, sans-serif;">Dari : ' . $dari . ' - Hingga : ' . $hingga . '</h5></center><hr/><br/>';
+$html = '<center><img src="../../assets/img/kop.jpg" width="1000px"></center><center><h3 style="font-family:sans-serif;">Laporan Kunjungan</h3></center><center><h5 style="font-family: Arial, Helvetica, sans-serif;">Dari : ' . $dari . ' - Hingga : ' . $hingga . '</h5></center><hr/><br/>';
 $html .= '<table border="1" cellpadding="2" cellspacing="0" width="100%">
  <tr style="font-family:sans-serif; font-size:10px">
  <th>No.</th>
@@ -57,6 +57,9 @@ while ($data = mysqli_fetch_array($sql)) {
  </tr>";
     $no++;
 }
+
+$html .= '<p align="right" style="font-family:sans-serif; margin-right: 70px"><b><br><br><br><br>Kepala Puskesmas Lewolaga<br><br><br><br><br><br> Wilrida Heliana Keron, Amd.Kep</b></p>';
+
 $html .= "</html>";
 $dompdf->loadHtml($html);
 // Setting ukuran dan orientasi kertas
