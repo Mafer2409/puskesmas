@@ -57,18 +57,18 @@ if (!isset($_SESSION['id_admin'])) {
                     </li>
 
                     <li class="sidebar-header">
-                        Kunjungan
+                        Pasien
                     </li>
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="?page=kunjungan">
-                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Kunjungan Hari Ini</span>
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Pasien Hari Ini</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="?page=kunjungan-all">
-                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Semua Kunjungan</span>
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Semua Pasien</span>
                         </a>
                     </li>
 

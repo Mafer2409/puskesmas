@@ -1,10 +1,10 @@
-<h1 class="h3 mb-3">Semua Data Kunjungan</h1>
+<h1 class="h3 mb-3">Semua Data Pasien</h1>
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Semua Data Kunjungan</h5>
+                <h5 class="card-title mb-0">Semua Data Pasien</h5>
             </div>
             <div class="card-body">
                 <form action="?page=kunjungan-cari" method="post">
@@ -47,6 +47,7 @@
                                 <th>Nama Pasien</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Umur</th>
+                                <th>Poli</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
                                 <th>Ket.</th>
@@ -67,6 +68,7 @@
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                     <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                    <td><?= $data['kunjungan_poli']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
                                     <td><?= $data['kunjungan_status']; ?></td>
@@ -139,6 +141,15 @@
                                                         <label class="form-label">Umur Pasien</label>
                                                         <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" value="<?= $data['kunjungan_pasien_umur'] ?>" placeholder="Umur..." value="18" required />
                                                     </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Poli</label>
+                                                        <select class="form-control form-control-lg" name="kunjungan_poli" required>
+                                                            <option value="<?= $data['kunjungan_poli'] ?>" selected><?= $data['kunjungan_poli'] ?></option>
+                                                            <option value="Poli Gigi">Poli Gigi</option>
+                                                            <option value="Poli KIA/KB">Poli KIA/KB</option>
+                                                            <option value="Poli Umum">Poli Umum</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
 
                                                 <div class="modal-footer">
@@ -189,6 +200,15 @@
                         <label class="form-label">Umur Pasien</label>
                         <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" placeholder="Umur..." value="18" required />
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Poli</label>
+                        <select class="form-control form-control-lg" name="kunjungan_poli" required>
+                            <option value="">- Pilih Poli -</option>
+                            <option value="Poli Gigi">Poli Gigi</option>
+                            <option value="Poli KIA/KB">Poli KIA/KB</option>
+                            <option value="Poli Umum">Poli Umum</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="modal-footer">
@@ -206,13 +226,14 @@ if (@$_POST['simpan']) {
     $kunjungan_pasien_nama = $_POST['kunjungan_pasien_nama'];
     $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
     $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
+    $kunjungan_poli = $_POST['kunjungan_poli'];
     $kunjungan_tanggal = date('Y-m-d');
     $kunjungan_jam = date('h:i:s a');
     $kunjungan_status = 'Belum Diperiksa';
     $kunjungan_admin = $idadmin;
     $kunjungan_paramedis = '0';
 
-    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
+    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_poli', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
 
     if ($sql) {
         echo "<script>alert('Data berhasil ditambah !');window.location='?page=kunjungan';</script>";
@@ -232,11 +253,12 @@ if (@$_POST['save']) {
     $kunjungan_pasien_nama = $_POST['kunjungan_pasien_nama'];
     $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
     $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
+    $kunjungan_poli = $_POST['kunjungan_poli'];
     $kunjungan_tanggal = date('Y-m-d');
     $kunjungan_jam = date('h:i:s a');
     $kunjungan_admin = $idadmin;
 
-    $sql = mysqli_query($con, "UPDATE kunjungan SET kunjungan_pasien_nama = '$kunjungan_pasien_nama', kunjungan_pasien_jk = '$kunjungan_pasien_jk', kunjungan_pasien_umur = '$kunjungan_pasien_umur', kunjungan_tanggal = '$kunjungan_tanggal', kunjungan_jam = '$kunjungan_jam', kunjungan_admin = '$kunjungan_admin' WHERE kunjungan_id = '$idedit'");
+    $sql = mysqli_query($con, "UPDATE kunjungan SET kunjungan_pasien_nama = '$kunjungan_pasien_nama', kunjungan_pasien_jk = '$kunjungan_pasien_jk', kunjungan_pasien_umur = '$kunjungan_pasien_umur', kunjungan_poli='$kunjungan_poli', kunjungan_tanggal = '$kunjungan_tanggal', kunjungan_jam = '$kunjungan_jam', kunjungan_admin = '$kunjungan_admin' WHERE kunjungan_id = '$idedit'");
 
     if ($sql) {
         echo "<script>alert('Data berhasil diubah !');window.location='?page=kunjungan';</script>";

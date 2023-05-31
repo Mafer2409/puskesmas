@@ -20,6 +20,7 @@ $html .= '<table border="1" cellpadding="2" cellspacing="0" width="100%">
  <th>Nama Pasien</th>
  <th>Jenis Kelamin</th>
  <th>Umur</th>
+ <th>Poli</th>
  <th>Waktu Kunjungan</th>
  <th>Status</th>
  <th>Paramedis</th>
@@ -45,6 +46,7 @@ while ($data = mysqli_fetch_array($sql)) {
  <td>" . $data['kunjungan_pasien_nama'] . "</td>
  <td>" . $data['kunjungan_pasien_jk'] . "</td>
  <td>" . $data['kunjungan_pasien_umur'] . "</td>
+ <td>" . $data['kunjungan_poli'] . "</td>
  <td>" . $data['kunjungan_tanggal'] . " - " . $data['kunjungan_jam'] . "</td>
  <td>" . $data['kunjungan_status'] . "</td>
  <td>" . $param . "</td>

@@ -1,10 +1,10 @@
-<h1 class="h3 mb-3">Data Kunjungan Hari Ini</h1>
+<h1 class="h3 mb-3">Data Pasien Hari Ini</h1>
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Data Kunjungan Hari Ini - Belum Diperiksa</h5>
+                <h5 class="card-title mb-0">Data Pasien Hari Ini - Belum Diperiksa</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -15,6 +15,7 @@
                                 <th>Nama Pasien</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Umur</th>
+                                <th>Poli</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
                                 <th>Ket.</th>
@@ -34,6 +35,7 @@
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                     <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                    <td><?= $data['kunjungan_poli']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
                                     <td><?= $data['kunjungan_status']; ?></td>
@@ -76,7 +78,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Data Kunjungan Hari Ini - Telah Diperiksa</h5>
+                <h5 class="card-title mb-0">Data Pasien Hari Ini - Telah Diperiksa</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -87,6 +89,7 @@
                                 <th>Nama Pasien</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Umur</th>
+                                <th>Poli</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
                                 <th>Ket.</th>
@@ -106,6 +109,7 @@
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                     <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                    <td><?= $data['kunjungan_poli']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
                                     <td><?= $data['kunjungan_status']; ?></td>

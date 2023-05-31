@@ -3,7 +3,7 @@ $dari = $_POST['dari'];
 $hingga = $_POST['hingga'];
 ?>
 
-<h1 class="h3 mb-3">Data Kunjungan</h1>
+<h1 class="h3 mb-3">Data Pasien</h1>
 
 <div class="row">
     <div class="col-12">
@@ -53,6 +53,7 @@ $hingga = $_POST['hingga'];
                                     <th>Nama Pasien</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Umur</th>
+                                    <th>Poli</th>
                                     <th>Tanggal</th>
                                     <th>Jam</th>
                                     <th>Ket.</th>
@@ -72,6 +73,7 @@ $hingga = $_POST['hingga'];
                                         <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                         <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                         <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                        <td><?= $data['kunjungan_poli']; ?></td>
                                         <td><?= $data['kunjungan_tanggal']; ?></td>
                                         <td><?= $data['kunjungan_jam']; ?></td>
                                         <td><?= $data['kunjungan_status']; ?></td>

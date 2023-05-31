@@ -4,7 +4,7 @@ $sql = mysqli_query($con, "SELECT * FROM kunjungan, penanganan, admin, paramedis
 $data = mysqli_fetch_assoc($sql);
 ?>
 
-<h1 class="h3 mb-3">Detail Kunjungan</h1>
+<h1 class="h3 mb-3">Detail Pasien</h1>
 
 <div class="row">
     <div class="col-12">
@@ -33,6 +33,11 @@ $data = mysqli_fetch_assoc($sql);
                                     <td><?= $data['kunjungan_pasien_umur'] ?></td>
                                 </tr>
                                 <tr>
+                                    <td>Poli</td>
+                                    <td>:</td>
+                                    <td><?= $data['kunjungan_poli'] ?></td>
+                                </tr>
+                                <tr>
                                     <td>Waktu Kunjungan</td>
                                     <td>:</td>
                                     <td><?= $data['kunjungan_tanggal'] ?> - <?= $data['kunjungan_jam'] ?></td>
@@ -45,7 +50,7 @@ $data = mysqli_fetch_assoc($sql);
                                 <tr>
                                     <td>Admin</td>
                                     <td>:</td>
-                                    <td><?= $data['kunjungan_admin'] ?></td>
+                                    <td><?= $data['admin_nama'] ?></td>
                                 </tr>
                                 <tr>
                                     <td>Paramedis</td>

@@ -3,7 +3,7 @@ $dari = $_POST['dari'];
 $hingga = $_POST['hingga'];
 ?>
 
-<h1 class="h3 mb-3">Data Kunjungan</h1>
+<h1 class="h3 mb-3">Data Pasien</h1>
 
 <div class="row">
     <div class="col-12">
@@ -52,6 +52,7 @@ $hingga = $_POST['hingga'];
                                 <th>Nama Pasien</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Umur</th>
+                                <th>Poli</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
                                 <th>Ket.</th>
@@ -72,6 +73,7 @@ $hingga = $_POST['hingga'];
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                     <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                    <td><?= $data['kunjungan_poli']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
                                     <td><?= $data['kunjungan_status']; ?></td>
@@ -96,13 +98,14 @@ $hingga = $_POST['hingga'];
                                         <?php
                                         } else {
                                         ?>
-                                            <a href="" class="text-info" data-toggle="modal" data-target="#ModalEditKunjungan<?= $data['kunjungan_id'] ?>"><i class="fa fa-edit fa-md"></i></a>
+                                            <!-- <a href="" class="text-info" data-toggle="modal" data-target="#ModalEditKunjungan<?= $data['kunjungan_id'] ?>"><i class="fa fa-edit fa-md"></i></a> -->
                                         <?php
                                         }
                                         ?>
                                         <!-- <a href="" onclick="return confirm('Yakin ingin menghapus data ini ???')" class="text-danger"><i class="fas fa-trash fa-md"></i></a> -->
                                     </td>
                                 </tr>
+
                             <?php
                             }
                             ?>
@@ -142,6 +145,15 @@ $hingga = $_POST['hingga'];
                         <label class="form-label">Umur Pasien</label>
                         <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" placeholder="Umur..." value="18" required />
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Poli</label>
+                        <select class="form-control form-control-lg" name="kunjungan_poli" required>
+                            <option value="">- Pilih Poli -</option>
+                            <option value="Poli Gigi">Poli Gigi</option>
+                            <option value="Poli KIA/KB">Poli KIA/KB</option>
+                            <option value="Poli Umum">Poli Umum</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="modal-footer">
@@ -159,13 +171,14 @@ if (@$_POST['simpan']) {
     $kunjungan_pasien_nama = $_POST['kunjungan_pasien_nama'];
     $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
     $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
+    $kunjungan_poli = $_POST['kunjungan_poli'];
     $kunjungan_tanggal = date('Y-m-d');
     $kunjungan_jam = date('h:i:s a');
     $kunjungan_status = 'Belum Diperiksa';
     $kunjungan_admin = $idadmin;
     $kunjungan_paramedis = '0';
 
-    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
+    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_poli', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
 
     if ($sql) {
         echo "<script>alert('Data berhasil ditambah !');window.location='?page=kunjungan';</script>";
@@ -173,4 +186,5 @@ if (@$_POST['simpan']) {
         echo "<script>alert('Data gagal ditambah !');window.location='?page=kunjungan';</script>";
     }
 }
+
 ?>
