@@ -10,10 +10,17 @@ $tglnow = date('d - m - Y');
 
 $dari = $_GET['dari'];
 $hingga = $_GET['hingga'];
+$poliidparamedis = $_GET['poliidparamedis'];
 
-$sql = mysqli_query($con, "SELECT * FROM kunjungan, penanganan WHERE kunjungan.kunjungan_id = penanganan.penanganan_kunjungan AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+$sqlpoli = mysqli_query($con, "SELECT * FROM poli WHERE poli_id = '$poliidparamedis'");
+$datapoli = mysqli_fetch_assoc($sqlpoli);
 
-$html = '<center><img src="../../assets/img/kop.jpg" width="1000px"></center><center><h3 style="font-family:sans-serif;">Laporan Kunjungan</h3></center><center><h5 style="font-family: Arial, Helvetica, sans-serif;">Dari : ' . $dari . ' - Hingga : ' . $hingga . '</h5></center><hr/><br/>';
+$sql = mysqli_query($con, "SELECT * FROM kunjungan, penanganan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_id = penanganan.penanganan_kunjungan AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+
+$html = '<center><img src="../../assets/img/kop.jpg" width="1000px"></center>';
+$html .= '<center><h3 style="font-family:sans-serif; margin-bottom: -10px;">Laporan Kunjungan</h3></center>';
+$html .= '<center><h4 style="font-family:sans-serif; margin-bottom: -10px;">' . $datapoli['poli_nama'] . '</h4></center>';
+$html .= '<center><h5 style="font-family: Arial, Helvetica, sans-serif;">Dari : ' . $dari . ' - Hingga : ' . $hingga . '</h5></center><hr/><br/>';
 $html .= '<table border="1" cellpadding="2" cellspacing="0" width="100%">
  <tr style="font-family:sans-serif; font-size:10px">
  <th>No.</th>
@@ -46,7 +53,7 @@ while ($data = mysqli_fetch_array($sql)) {
  <td>" . $data['kunjungan_pasien_nama'] . "</td>
  <td>" . $data['kunjungan_pasien_jk'] . "</td>
  <td>" . $data['kunjungan_pasien_umur'] . "</td>
- <td>" . $data['kunjungan_poli'] . "</td>
+ <td>" . $data['poli_nama'] . "</td>
  <td>" . $data['kunjungan_tanggal'] . " - " . $data['kunjungan_jam'] . "</td>
  <td>" . $data['kunjungan_status'] . "</td>
  <td>" . $param . "</td>

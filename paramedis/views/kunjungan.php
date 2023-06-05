@@ -27,7 +27,11 @@
                             <?php
                             $today = date('Y-m-d');
                             $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM kunjungan WHERE kunjungan.kunjungan_tanggal = '$today' AND kunjungan.kunjungan_status = 'Belum Diperiksa' ORDER BY kunjungan.kunjungan_id DESC");
+                            if ($poliidparamedis == '1') {
+                                $sql = mysqli_query($con, "SELECT * FROM kunjungan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_tanggal = '$today' AND kunjungan.kunjungan_status = 'Belum Diperiksa' ORDER BY kunjungan.kunjungan_id DESC");
+                            } else {
+                                $sql = mysqli_query($con, "SELECT * FROM kunjungan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_tanggal = '$today' AND kunjungan.kunjungan_status = 'Belum Diperiksa' AND kunjungan.kunjungan_poli_id = '$poliidparamedis' ORDER BY kunjungan.kunjungan_id DESC");
+                            }
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
@@ -35,7 +39,7 @@
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                     <td><?= $data['kunjungan_pasien_umur']; ?></td>
-                                    <td><?= $data['kunjungan_poli']; ?></td>
+                                    <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
                                     <td><?= $data['kunjungan_status']; ?></td>
@@ -99,9 +103,11 @@
                         </thead>
                         <tbody>
                             <?php
-                            $today = date('Y-m-d');
-                            $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM kunjungan WHERE kunjungan.kunjungan_tanggal = '$today' AND kunjungan.kunjungan_status = 'Telah Diperiksa' ORDER BY kunjungan.kunjungan_id DESC");
+                            if ($poliidparamedis == '1') {
+                                $sql = mysqli_query($con, "SELECT * FROM kunjungan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_status = 'Telah Diperiksa' ORDER BY kunjungan.kunjungan_id DESC");
+                            } else {
+                                $sql = mysqli_query($con, "SELECT * FROM kunjungan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_status = 'Telah Diperiksa' AND kunjungan.kunjungan_poli_id = '$poliidparamedis' ORDER BY kunjungan.kunjungan_id DESC");
+                            }
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
@@ -109,7 +115,7 @@
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                     <td><?= $data['kunjungan_pasien_umur']; ?></td>
-                                    <td><?= $data['kunjungan_poli']; ?></td>
+                                    <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
                                     <td><?= $data['kunjungan_status']; ?></td>

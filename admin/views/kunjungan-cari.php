@@ -65,7 +65,7 @@ $hingga = $_POST['hingga'];
                             <?php
                             $today = date('Y-m-d');
                             $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin WHERE kunjungan.kunjungan_admin = admin.admin_id AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin, poli WHERE kunjungan.kunjungan_admin = admin.admin_id AND kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
@@ -73,7 +73,7 @@ $hingga = $_POST['hingga'];
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                     <td><?= $data['kunjungan_pasien_umur']; ?></td>
-                                    <td><?= $data['kunjungan_poli']; ?></td>
+                                    <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
                                     <td><?= $data['kunjungan_status']; ?></td>
@@ -147,11 +147,16 @@ $hingga = $_POST['hingga'];
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Poli</label>
-                        <select class="form-control form-control-lg" name="kunjungan_poli" required>
+                        <select name="kunjungan_poli_id" class="form-control form-control-lg" required>
                             <option value="">- Pilih Poli -</option>
-                            <option value="Poli Gigi">Poli Gigi</option>
-                            <option value="Poli KIA/KB">Poli KIA/KB</option>
-                            <option value="Poli Umum">Poli Umum</option>
+                            <?php
+                            $sqlpoli = mysqli_query($con, "SELECT * FROM poli ORDER BY poli_nama ASC");
+                            while ($datapoli = mysqli_fetch_assoc($sqlpoli)) {
+                            ?>
+                                <option value="<?= $datapoli['poli_id'] ?>"><?= $datapoli['poli_nama'] ?></option>
+                            <?php
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -171,14 +176,14 @@ if (@$_POST['simpan']) {
     $kunjungan_pasien_nama = $_POST['kunjungan_pasien_nama'];
     $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
     $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
-    $kunjungan_poli = $_POST['kunjungan_poli'];
+    $kunjungan_poli_id = $_POST['kunjungan_poli_id'];
     $kunjungan_tanggal = date('Y-m-d');
     $kunjungan_jam = date('h:i:s a');
     $kunjungan_status = 'Belum Diperiksa';
     $kunjungan_admin = $idadmin;
     $kunjungan_paramedis = '0';
 
-    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_poli', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
+    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_poli_id', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
 
     if ($sql) {
         echo "<script>alert('Data berhasil ditambah !');window.location='?page=kunjungan';</script>";

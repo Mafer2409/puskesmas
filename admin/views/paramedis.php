@@ -9,9 +9,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="row" style="margin-bottom: 40px;">
-                        <div class="col-lg-6" style="float:left">
+                        <!-- <div class="col-lg-6" style="float:left">
                             <a href="" class="btn btn-md btn-success" data-toggle="modal" data-target="#ModalTambahParamedis"><i class="fa fa-plus"></i> Tambah Data</a>
-                        </div>
+                        </div> -->
                         <!-- <div class="col-lg-6">
                             <a href="../report/report-admin/report-paramedis.php" class="btn btn-md btn-info" target="_blank" style="float:right"><i class="fa fa-print"></i> Cetak Data</a>
                         </div> -->
@@ -23,18 +23,20 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Nama Paramedis</th>
+                                <th>Poli</th>
                                 <th>E-Mail</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM paramedis");
+                            $sql = mysqli_query($con, "SELECT * FROM paramedis, poli WHERE paramedis.paramedis_poli_id = poli.poli_id");
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
                                     <td><?= $no++; ?>.</td>
                                     <td><?= $data['paramedis_nama']; ?></td>
+                                    <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['paramedis_email']; ?></td>
                                 </tr>
                             <?php

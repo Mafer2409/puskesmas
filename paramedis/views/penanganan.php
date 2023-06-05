@@ -1,6 +1,6 @@
 <?php
 $id = $_GET['id'];
-$sqlkunjungan = mysqli_query($con, "SELECT * FROM kunjungan WHERE kunjungan_id = '$id'");
+$sqlkunjungan = mysqli_query($con, "SELECT * FROM kunjungan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_id = '$id'");
 $datakunjungan = mysqli_fetch_assoc($sqlkunjungan);
 ?>
 
@@ -25,6 +25,10 @@ $datakunjungan = mysqli_fetch_assoc($sqlkunjungan);
                             <div class="mb-3">
                                 <label class="form-label">Umur Pasien</label>
                                 <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" placeholder="Umur..." value="<?= $datakunjungan['kunjungan_pasien_umur'] ?>" required readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Poli</label>
+                                <input class="form-control form-control-lg" type="text" name="kunjungan_poli_id" value="<?= $datakunjungan['poli_nama'] ?>" required readonly />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Keluhan</label>

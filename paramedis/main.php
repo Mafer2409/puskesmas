@@ -6,6 +6,10 @@ if (!isset($_SESSION['id_paramedis'])) {
 } else {
     $idparamedis = $_SESSION['id_paramedis'];
     $namaparamedis = $_SESSION['nama_paramedis'];
+    $poliidparamedis = $_SESSION['poli_id_paramedis'];
+
+    $sqlpoliparamedis = mysqli_query($con, "SELECT * FROM poli WHERE poli_id = '$poliidparamedis'");
+    $datapoliparamedis = mysqli_fetch_assoc($sqlpoliparamedis);
 }
 ?>
 
@@ -42,7 +46,7 @@ if (!isset($_SESSION['id_paramedis'])) {
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
                 <a class="sidebar-brand" href="?page=home">
-                    <span class="align-middle">Paramedis</span>
+                    <span class="align-middle">Paramedis <small>| <?= $datapoliparamedis['poli_nama'] ?></small></span>
                 </a>
 
                 <ul class="sidebar-nav">

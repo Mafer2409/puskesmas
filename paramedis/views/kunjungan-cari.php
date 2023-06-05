@@ -37,10 +37,10 @@ $hingga = $_POST['hingga'];
                 <div class="row">
                     <div class="row" style="margin-bottom: 40px;">
                         <div class="col-lg-6" style="float:left">
-                            <a href="" class="btn btn-md btn-success" data-toggle="modal" data-target="#ModalTambahKunjungan"><i class="fa fa-plus"></i> Tambah Data</a>
+                            <!-- <a href="" class="btn btn-md btn-success" data-toggle="modal" data-target="#ModalTambahKunjungan"><i class="fa fa-plus"></i> Tambah Data</a> -->
                         </div>
                         <div class="col-lg-6">
-                            <a href="../report/report-paramedis/report-kunjungan-dom.php?dari=<?= $dari ?>&hingga=<?= $hingga ?>" target="_blank" class="btn btn-md btn-info" style="float:right"><i class="fa fa-print"></i> Cetak Data Hasil Pencarian</a>
+                            <a href="../report/report-paramedis/report-kunjungan-dom.php?dari=<?= $dari ?>&hingga=<?= $hingga ?>&poliidparamedis=<?= $poliidparamedis ?>" target="_blank" class="btn btn-md btn-info" style="float:right"><i class="fa fa-print"></i> Cetak Data Hasil Pencarian</a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,11 @@ $hingga = $_POST['hingga'];
                                 <?php
                                 $today = date('Y-m-d');
                                 $no = 1;
-                                $sql = mysqli_query($con, "SELECT * FROM kunjungan WHERE kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+                                if ($poliidparamedis == '1') {
+                                    $sql = mysqli_query($con, "SELECT * FROM kunjungan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+                                } else {
+                                    $sql = mysqli_query($con, "SELECT * FROM kunjungan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan_tanggal BETWEEN '$dari' AND '$hingga' AND kunjungan.kunjungan_poli_id = '$poliidparamedis' ORDER BY kunjungan.kunjungan_id DESC");
+                                }
                                 while ($data = mysqli_fetch_assoc($sql)) {
                                 ?>
                                     <tr>
@@ -73,7 +77,7 @@ $hingga = $_POST['hingga'];
                                         <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                         <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                         <td><?= $data['kunjungan_pasien_umur']; ?></td>
-                                        <td><?= $data['kunjungan_poli']; ?></td>
+                                        <td><?= $data['poli_nama']; ?></td>
                                         <td><?= $data['kunjungan_tanggal']; ?></td>
                                         <td><?= $data['kunjungan_jam']; ?></td>
                                         <td><?= $data['kunjungan_status']; ?></td>

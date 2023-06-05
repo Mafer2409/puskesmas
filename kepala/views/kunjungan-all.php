@@ -60,7 +60,7 @@
                             <?php
                             $today = date('Y-m-d');
                             $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin WHERE kunjungan.kunjungan_admin = admin.admin_id ORDER BY kunjungan.kunjungan_id DESC");
+                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_admin = admin.admin_id ORDER BY kunjungan.kunjungan_id DESC");
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
@@ -68,7 +68,7 @@
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
                                     <td><?= $data['kunjungan_pasien_umur']; ?></td>
-                                    <td><?= $data['kunjungan_poli']; ?></td>
+                                    <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
                                     <td><?= $data['kunjungan_status']; ?></td>
@@ -93,7 +93,7 @@
                                         <?php
                                         } else {
                                         ?>
-                                            <a href="" class="text-info" data-toggle="modal" data-target="#ModalEditKunjungan<?= $data['kunjungan_id'] ?>"><i class="fa fa-edit fa-md"></i></a>
+                                            <!-- <a href="" class="text-info" data-toggle="modal" data-target="#ModalEditKunjungan<?= $data['kunjungan_id'] ?>"><i class="fa fa-edit fa-md"></i></a> -->
                                         <?php
                                         }
                                         ?>

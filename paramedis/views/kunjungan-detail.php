@@ -1,6 +1,6 @@
 <?php
 $id = $_GET['id'];
-$sql = mysqli_query($con, "SELECT * FROM kunjungan, penanganan, admin, paramedis WHERE penanganan.penanganan_kunjungan = kunjungan.kunjungan_id AND kunjungan.kunjungan_admin = admin.admin_id AND kunjungan.kunjungan_paramedis = paramedis.paramedis_id AND kunjungan.kunjungan_id = '$id'");
+$sql = mysqli_query($con, "SELECT * FROM kunjungan, penanganan, admin, paramedis, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND penanganan.penanganan_kunjungan = kunjungan.kunjungan_id AND kunjungan.kunjungan_admin = admin.admin_id AND kunjungan.kunjungan_paramedis = paramedis.paramedis_id AND kunjungan.kunjungan_id = '$id'");
 $data = mysqli_fetch_assoc($sql);
 ?>
 
@@ -35,7 +35,7 @@ $data = mysqli_fetch_assoc($sql);
                                 <tr>
                                     <td>Poli</td>
                                     <td>:</td>
-                                    <td><?= $data['kunjungan_poli'] ?></td>
+                                    <td><?= $data['poli_nama'] ?></td>
                                 </tr>
                                 <tr>
                                     <td>Waktu Kunjungan</td>
@@ -50,7 +50,7 @@ $data = mysqli_fetch_assoc($sql);
                                 <tr>
                                     <td>Admin</td>
                                     <td>:</td>
-                                    <td><?= $data['kunjungan_admin'] ?></td>
+                                    <td><?= $data['admin_nama'] ?></td>
                                 </tr>
                                 <tr>
                                     <td>Paramedis</td>

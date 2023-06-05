@@ -24,6 +24,7 @@ if ($akses == 'admin') {
         $data = mysqli_fetch_assoc($sql);
         $_SESSION['id_paramedis'] = $data['paramedis_id'];
         $_SESSION['nama_paramedis'] = $data['paramedis_nama'];
+        $_SESSION['poli_id_paramedis'] = $data['paramedis_poli_id'];
         echo "<script>alert('Login Paramedis Berhasil !');window.location='paramedis/main.php';</script>";
     } else {
         echo "<script>alert('Login Gagal ! Masukan E-Mail dan Password yang valid !');window.location='index.php';</script>";

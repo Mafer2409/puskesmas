@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Bulan Mei 2023 pada 17.00
+-- Waktu pembuatan: 05 Jun 2023 pada 19.07
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -73,7 +73,7 @@ CREATE TABLE `kunjungan` (
   `kunjungan_pasien_nama` varchar(255) NOT NULL,
   `kunjungan_pasien_jk` varchar(255) NOT NULL,
   `kunjungan_pasien_umur` int(11) NOT NULL,
-  `kunjungan_poli` varchar(255) NOT NULL,
+  `kunjungan_poli_id` int(11) NOT NULL,
   `kunjungan_tanggal` date NOT NULL,
   `kunjungan_jam` varchar(255) NOT NULL,
   `kunjungan_status` varchar(255) NOT NULL,
@@ -91,15 +91,16 @@ CREATE TABLE `paramedis` (
   `paramedis_id` int(11) NOT NULL,
   `paramedis_nama` varchar(255) NOT NULL,
   `paramedis_email` varchar(255) NOT NULL,
-  `paramedis_password` varchar(255) NOT NULL
+  `paramedis_password` varchar(255) NOT NULL,
+  `paramedis_poli_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `paramedis`
 --
 
-INSERT INTO `paramedis` (`paramedis_id`, `paramedis_nama`, `paramedis_email`, `paramedis_password`) VALUES
-(1, 'sisilia', 'paramedis1@mail.com', '2d0140635e1d6a42f6631b12ebdf84ad');
+INSERT INTO `paramedis` (`paramedis_id`, `paramedis_nama`, `paramedis_email`, `paramedis_password`, `paramedis_poli_id`) VALUES
+(1, 'sisilia', 'paramedis1@mail.com', '2d0140635e1d6a42f6631b12ebdf84ad', 2);
 
 -- --------------------------------------------------------
 
@@ -115,6 +116,27 @@ CREATE TABLE `penanganan` (
   `penanganan_pengobatan` text NOT NULL,
   `penanganan_ket` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `poli`
+--
+
+CREATE TABLE `poli` (
+  `poli_id` int(11) NOT NULL,
+  `poli_nama` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `poli`
+--
+
+INSERT INTO `poli` (`poli_id`, `poli_nama`) VALUES
+(1, 'Poli Umum'),
+(2, 'Poli Gigi'),
+(3, 'Poli KIA/KB'),
+(4, 'Poli Gizi');
 
 --
 -- Indexes for dumped tables
@@ -151,6 +173,12 @@ ALTER TABLE `penanganan`
   ADD PRIMARY KEY (`penanganan_id`);
 
 --
+-- Indeks untuk tabel `poli`
+--
+ALTER TABLE `poli`
+  ADD PRIMARY KEY (`poli_id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -170,19 +198,25 @@ ALTER TABLE `kepala`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT untuk tabel `paramedis`
 --
 ALTER TABLE `paramedis`
-  MODIFY `paramedis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `paramedis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `penanganan`
 --
 ALTER TABLE `penanganan`
-  MODIFY `penanganan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `penanganan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT untuk tabel `poli`
+--
+ALTER TABLE `poli`
+  MODIFY `poli_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

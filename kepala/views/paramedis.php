@@ -23,6 +23,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Nama Paramedis</th>
+                                <th>Poli</th>
                                 <th>E-Mail</th>
                                 <th>Option</th>
                             </tr>
@@ -30,12 +31,13 @@
                         <tbody>
                             <?php
                             $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM paramedis");
+                            $sql = mysqli_query($con, "SELECT * FROM paramedis, poli WHERE paramedis.paramedis_poli_id = poli.poli_id");
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
                                     <td><?= $no++; ?>.</td>
                                     <td><?= $data['paramedis_nama']; ?></td>
+                                    <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['paramedis_email']; ?></td>
                                     <td>
                                         <a href="" class="text-info" data-toggle="modal" data-target="#ModalEditParamedis<?= $data['paramedis_id'] ?>"><i class="fa fa-edit fa-md"></i></a>
@@ -58,6 +60,25 @@
                                                         <label class="form-label">Nama Paramedis</label>
                                                         <input type="hidden" name="paramedis_id" value="<?= $data['paramedis_id'] ?>">
                                                         <input class="form-control form-control-lg" type="text" name="paramedis_nama" value="<?= $data['paramedis_nama'] ?>" required />
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Poli</label>
+                                                        <select name="paramedis_poli_id" class="form-control form-control-lg" required>
+                                                            <?php
+                                                            $sqlpoli = mysqli_query($con, "SELECT * FROM poli ORDER BY poli_nama ASC");
+                                                            while ($datapoli = mysqli_fetch_assoc($sqlpoli)) {
+                                                                $sel = '';
+                                                                if ($datapoli['poli_id'] == $data['paramedis_poli_id']) {
+                                                                    $sel = 'selected';
+                                                                } else {
+                                                                    $sel = '';
+                                                                }
+                                                            ?>
+                                                                <option value="<?= $datapoli['poli_id'] ?>" <?= $sel ?>><?= $datapoli['poli_nama'] ?></option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">E-Mail</label>
@@ -106,6 +127,20 @@
                         <input class="form-control form-control-lg" type="text" name="paramedis_nama" placeholder="Nama Lengkap..." required />
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Poli</label>
+                        <select name="paramedis_poli_id" class="form-control form-control-lg" required>
+                            <option value="">- Pilih Poli -</option>
+                            <?php
+                            $sqlpoli = mysqli_query($con, "SELECT * FROM poli ORDER BY poli_nama ASC");
+                            while ($datapoli = mysqli_fetch_assoc($sqlpoli)) {
+                            ?>
+                                <option value="<?= $datapoli['poli_id'] ?>"><?= $datapoli['poli_nama'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">E-Mail</label>
                         <input class="form-control form-control-lg" type="email" name="paramedis_email" placeholder="E-Mail..." required />
                     </div>
@@ -130,8 +165,9 @@ if (@$_POST['simpan']) {
     $paramedis_nama = $_POST['paramedis_nama'];
     $paramedis_email = $_POST['paramedis_email'];
     $paramedis_password = md5($_POST['paramedis_password']);
+    $paramedis_poli_id = $_POST['paramedis_poli_id'];
 
-    $sql = mysqli_query($con, "INSERT INTO paramedis VALUES('', '$paramedis_nama', '$paramedis_email', '$paramedis_password')");
+    $sql = mysqli_query($con, "INSERT INTO paramedis VALUES('', '$paramedis_nama', '$paramedis_email', '$paramedis_password', '$paramedis_poli_id')");
 
     if ($sql) {
         echo "<script>alert('Data berhasil ditambah !');window.location='?page=paramedis';</script>";
@@ -146,9 +182,10 @@ if (@$_POST['save']) {
     $paramedis_nama = $_POST['paramedis_nama'];
     $paramedis_email = $_POST['paramedis_email'];
     $password = $_POST['paramedis_password'];
+    $paramedis_poli_id = $_POST['paramedis_poli_id'];
 
     if ($password == '') {
-        $sql = mysqli_query($con, "UPDATE paramedis SET paramedis_nama = '$paramedis_nama', paramedis_email = '$paramedis_email' WHERE paramedis_id = '$paramedis_id'");
+        $sql = mysqli_query($con, "UPDATE paramedis SET paramedis_nama = '$paramedis_nama', paramedis_email = '$paramedis_email', paramedis_poli_id='$paramedis_poli_id' WHERE paramedis_id = '$paramedis_id'");
         if ($sql) {
             echo "<script>alert('Data berhasil diubah !');window.location='?page=paramedis';</script>";
         } else {
@@ -156,7 +193,7 @@ if (@$_POST['save']) {
         }
     } else {
         $paramedis_password = md5($_POST['paramedis_password']);
-        $sql = mysqli_query($con, "UPDATE paramedis SET paramedis_nama = '$paramedis_nama', paramedis_email = '$paramedis_email', paramedis_password = '$paramedis_password' WHERE paramedis_id = '$paramedis_id'");
+        $sql = mysqli_query($con, "UPDATE paramedis SET paramedis_nama = '$paramedis_nama', paramedis_email = '$paramedis_email', paramedis_poli_id='$paramedis_poli_id', paramedis_password = '$paramedis_password' WHERE paramedis_id = '$paramedis_id'");
         if ($sql) {
             echo "<script>alert('Data berhasil diubah !');window.location='?page=paramedis';</script>";
         } else {
