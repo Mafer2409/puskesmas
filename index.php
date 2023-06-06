@@ -52,7 +52,7 @@ session_destroy();
                                                 <option value="">-- Pilih Akses --</option>
                                                 <option value="admin">Admin</option>
                                                 <option value="paramedis">Paramedis</option>
-                                                <option value="kepala">Kepala</option>
+                                                <option value="kepala">Kepala Puskesmas</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">
