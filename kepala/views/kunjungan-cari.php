@@ -1,6 +1,15 @@
 <?php
 $dari = $_POST['dari'];
 $hingga = $_POST['hingga'];
+$poli = $_POST['poli'];
+
+if ($poli != '') {
+    $sqlpoli = mysqli_query($con, "SELECT * FROM poli WHERE poli_id = '$poli'");
+    $datapoli = mysqli_fetch_assoc($sqlpoli);
+    $namapoli = $datapoli['poli_nama'];
+} else {
+    $namapoli = 'Semua poli';
+}
 ?>
 
 <h1 class="h3 mb-3">Data Pasien</h1>
@@ -9,21 +18,37 @@ $hingga = $_POST['hingga'];
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Dari : <?= $dari ?> - Hingga : <?= $hingga ?></h5>
+                <h5 class="card-title mb-0">Dari : <?= $dari ?> - Hingga : <?= $hingga ?> Poli : <?= $namapoli ?></h5>
             </div>
             <div class="card-body">
                 <form action="?page=kunjungan-cari" method="post">
                     <div class="row mb-2">
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
                             <div class="mb-3">
                                 <label class="form-label">Dari :</label>
                                 <input class="form-control form-control-sm" type="date" name="dari" required value="<?= date('Y-m-d') ?>" />
                             </div>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
                             <div class="mb-3">
                                 <label class="form-label">Hingga :</label>
                                 <input class="form-control form-control-sm" type="date" name="hingga" required value="<?= date('Y-m-d') ?>" />
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="mb-3">
+                                <label class="form-label">Poli :</label>
+                                <select name="poli" class="form-control form-control-sm">
+                                    <option value="">Semua Poli</option>
+                                    <?php
+                                    $sqlpoli = mysqli_query($con, "SELECT * FROM poli");
+                                    while ($datapoli = mysqli_fetch_assoc($sqlpoli)) {
+                                    ?>
+                                        <option value="<?= $datapoli['poli_id'] ?>"><?= $datapoli['poli_nama'] ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -31,6 +56,7 @@ $hingga = $_POST['hingga'];
                                 <input type="submit" class="btn btn-primary btn-block btn-md" name="cari" value="Cari">
                             </div>
                         </div>
+
                     </div>
                 </form>
 
@@ -40,7 +66,7 @@ $hingga = $_POST['hingga'];
                             <!-- <a href="" class="btn btn-md btn-success" data-toggle="modal" data-target="#ModalTambahKunjungan"><i class="fa fa-plus"></i> Tambah Data</a> -->
                         </div>
                         <div class="col-lg-6">
-                            <a href="../report/report-admin/report-kunjungan-cari.php?dari=<?= $dari ?>&hingga=<?= $hingga ?>" target="_blank" class="btn btn-md btn-info" style="float:right"><i class="fa fa-print"></i> Cetak Data Hasil Pencarian</a>
+                            <a href="../report/report-admin/report-kunjungan-cari.php?dari=<?= $dari ?>&hingga=<?= $hingga ?>&poli=<?= $poli ?>" target="_blank" class="btn btn-md btn-info" style="float:right"><i class="fa fa-print"></i> Cetak Data Hasil Pencarian</a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +91,13 @@ $hingga = $_POST['hingga'];
                             <?php
                             $today = date('Y-m-d');
                             $no = 1;
-                            $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_admin = admin.admin_id AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+
+                            if ($poli == '' || $poli == '1') {
+                                $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin, poli WHERE kunjungan.kunjungan_admin = admin.admin_id AND kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+                            } else {
+                                $sql = mysqli_query($con, "SELECT * FROM kunjungan, admin, poli WHERE kunjungan.kunjungan_admin = admin.admin_id AND kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan_poli_id = '$poli' AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+                            }
+
                             while ($data = mysqli_fetch_assoc($sql)) {
                             ?>
                                 <tr>
@@ -105,6 +137,7 @@ $hingga = $_POST['hingga'];
                                         <!-- <a href="" onclick="return confirm('Yakin ingin menghapus data ini ???')" class="text-danger"><i class="fas fa-trash fa-md"></i></a> -->
                                     </td>
                                 </tr>
+
                             <?php
                             }
                             ?>
@@ -144,6 +177,20 @@ $hingga = $_POST['hingga'];
                         <label class="form-label">Umur Pasien</label>
                         <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" placeholder="Umur..." value="18" required />
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Poli</label>
+                        <select name="kunjungan_poli_id" class="form-control form-control-lg" required>
+                            <option value="">- Pilih Poli -</option>
+                            <?php
+                            $sqlpoli = mysqli_query($con, "SELECT * FROM poli ORDER BY poli_nama ASC");
+                            while ($datapoli = mysqli_fetch_assoc($sqlpoli)) {
+                            ?>
+                                <option value="<?= $datapoli['poli_id'] ?>"><?= $datapoli['poli_nama'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="modal-footer">
@@ -161,13 +208,14 @@ if (@$_POST['simpan']) {
     $kunjungan_pasien_nama = $_POST['kunjungan_pasien_nama'];
     $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
     $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
+    $kunjungan_poli_id = $_POST['kunjungan_poli_id'];
     $kunjungan_tanggal = date('Y-m-d');
     $kunjungan_jam = date('h:i:s a');
     $kunjungan_status = 'Belum Diperiksa';
     $kunjungan_admin = $idadmin;
     $kunjungan_paramedis = '0';
 
-    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
+    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_poli_id', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
 
     if ($sql) {
         echo "<script>alert('Data berhasil ditambah !');window.location='?page=kunjungan';</script>";
@@ -175,4 +223,5 @@ if (@$_POST['simpan']) {
         echo "<script>alert('Data gagal ditambah !');window.location='?page=kunjungan';</script>";
     }
 }
+
 ?>

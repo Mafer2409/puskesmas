@@ -10,8 +10,16 @@ $tglnow = date('d - m - Y');
 
 $dari = $_GET['dari'];
 $hingga = $_GET['hingga'];
+$poli = $_GET['poli'];
 
-$sql = mysqli_query($con, "SELECT * FROM kunjungan, penanganan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_id = penanganan.penanganan_kunjungan AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+$sqlpoli = mysqli_query($con, "SELECT * FROM poli WHERE poli_id = '$poli'");
+$datapoli = mysqli_fetch_assoc($sqlpoli);
+
+if ($poli == '' || $poli == '1') {
+    $sql = mysqli_query($con, "SELECT * FROM kunjungan, penanganan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_id = penanganan.penanganan_kunjungan AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+} else {
+    $sql = mysqli_query($con, "SELECT * FROM kunjungan, penanganan, poli WHERE kunjungan.kunjungan_poli_id = poli.poli_id AND kunjungan.kunjungan_id = penanganan.penanganan_kunjungan AND kunjungan.kunjungan_poli_id = '$poli' AND kunjungan.kunjungan_tanggal BETWEEN '$dari' AND '$hingga' ORDER BY kunjungan.kunjungan_id DESC");
+}
 
 $path = '../../assets/img/kop.jpg';
 $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -21,6 +29,14 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
 $html = '<center><img src="../../assets/img/kop.jpg" width="1000px"></center>';
 $html .= '<center><h3 style="font-family:sans-serif; margin-bottom: -10px;">Laporan Kunjungan</h3></center>';
+
+if ($poli != '') {
+    $html .= '<center><h3 style="font-family:sans-serif; margin-bottom: -10px;">' . $datapoli['poli_nama'] . '</h3></center>';
+} else {
+    $html .= '<center><h3 style="font-family:sans-serif; margin-bottom: -10px;">Semua Poli</h3></center>';
+}
+
+
 $html .= '<center><h5 style="font-family: Arial, Helvetica, sans-serif;">Dari : ' . $dari . ' - Hingga : ' . $hingga . '</h5></center><hr/><br/>';
 $html .= '<table border="1" cellpadding="2" cellspacing="0" width="100%">
  <tr style="font-family:sans-serif; font-size:10px">

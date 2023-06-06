@@ -9,16 +9,32 @@
             <div class="card-body">
                 <form action="?page=kunjungan-cari" method="post">
                     <div class="row mb-2">
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
                             <div class="mb-3">
                                 <label class="form-label">Dari :</label>
                                 <input class="form-control form-control-sm" type="date" name="dari" required value="<?= date('Y-m-d') ?>" />
                             </div>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
                             <div class="mb-3">
                                 <label class="form-label">Hingga :</label>
                                 <input class="form-control form-control-sm" type="date" name="hingga" required value="<?= date('Y-m-d') ?>" />
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="mb-3">
+                                <label class="form-label">Poli :</label>
+                                <select name="poli" class="form-control form-control-sm">
+                                    <option value="">Semua Poli</option>
+                                    <?php
+                                    $sqlpoli = mysqli_query($con, "SELECT * FROM poli");
+                                    while ($datapoli = mysqli_fetch_assoc($sqlpoli)) {
+                                    ?>
+                                        <option value="<?= $datapoli['poli_id'] ?>"><?= $datapoli['poli_nama'] ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-2">
