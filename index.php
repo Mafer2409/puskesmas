@@ -45,7 +45,7 @@
         <div class="container py-3">
             <div class="d-flex align-items-center">
                 <a href="index.php">
-                    <h2 class="text-white fw-bold m-0">Puskesmas Lewolaga</h2>
+                    <h2 class="text-white fw-bold m-0"> <img src="admin/img/logo/puskesmas-logo.png" class="img-fluid" width="50" height="50"> Puskesmas Lewolaga</h2>
                 </a>
                 <div class="ms-auto d-flex align-items-center">
                     <small class="ms-4"><i class="fa fa-map-marker-alt me-3"></i>Jl. Negara Trans, Lewolaga, Flores Timur</small>
