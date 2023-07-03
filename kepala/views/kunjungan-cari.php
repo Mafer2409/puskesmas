@@ -77,7 +77,7 @@ if ($poli != '') {
                                 <th>No.</th>
                                 <th>Nama Pasien</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Umur</th>
+                                <th>Tanggal lahir</th>
                                 <th>Poli</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
@@ -104,7 +104,7 @@ if ($poli != '') {
                                     <td><?= $no++; ?>.</td>
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
-                                    <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                    <td><?= date('d-m-Y', strtotime($data['kunjungan_pasien_tgl_lahir']))  ?></td>
                                     <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
@@ -130,11 +130,9 @@ if ($poli != '') {
                                         <?php
                                         } else {
                                         ?>
-                                            <!-- <a href="" class="text-info" data-toggle="modal" data-target="#ModalEditKunjungan<?= $data['kunjungan_id'] ?>"><i class="fa fa-edit fa-md"></i></a> -->
                                         <?php
                                         }
                                         ?>
-                                        <!-- <a href="" onclick="return confirm('Yakin ingin menghapus data ini ???')" class="text-danger"><i class="fas fa-trash fa-md"></i></a> -->
                                     </td>
                                 </tr>
 
@@ -148,80 +146,3 @@ if ($poli != '') {
         </div>
     </div>
 </div>
-
-<!-- MODAL TAMBAH -->
-<div class="modal fade" id="ModalTambahKunjungan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kunjungan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="" method="post">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label">Nama Pasien</label>
-                        <input class="form-control form-control-lg" type="text" name="kunjungan_pasien_nama" placeholder="Nama Lengkap..." required />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Jenis Kelamin</label>
-                        <select class="form-control form-control-lg" name="kunjungan_pasien_jk" required>
-                            <option value="">-- Pilih Jenis Kelamin --</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Umur Pasien</label>
-                        <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" placeholder="Umur..." value="18" required />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Poli</label>
-                        <select name="kunjungan_poli_id" class="form-control form-control-lg" required>
-                            <option value="">- Pilih Poli -</option>
-                            <?php
-                            $sqlpoli = mysqli_query($con, "SELECT * FROM poli ORDER BY poli_nama ASC");
-                            while ($datapoli = mysqli_fetch_assoc($sqlpoli)) {
-                            ?>
-                                <option value="<?= $datapoli['poli_id'] ?>"><?= $datapoli['poli_nama'] ?></option>
-                            <?php
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" name="simpan" value="Save">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- END MODAL TAMBAH -->
-
-<?php
-if (@$_POST['simpan']) {
-    $kunjungan_pasien_nama = $_POST['kunjungan_pasien_nama'];
-    $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
-    $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
-    $kunjungan_poli_id = $_POST['kunjungan_poli_id'];
-    $kunjungan_tanggal = date('Y-m-d');
-    $kunjungan_jam = date('h:i:s a');
-    $kunjungan_status = 'Belum Diperiksa';
-    $kunjungan_admin = $idadmin;
-    $kunjungan_paramedis = '0';
-
-    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_poli_id', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
-
-    if ($sql) {
-        echo "<script>alert('Data berhasil ditambah !');window.location='?page=kunjungan';</script>";
-    } else {
-        echo "<script>alert('Data gagal ditambah !');window.location='?page=kunjungan';</script>";
-    }
-}
-
-?>

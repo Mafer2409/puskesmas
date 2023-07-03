@@ -42,7 +42,7 @@ if (!isset($_SESSION['id_admin'])) {
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
                 <a class="sidebar-brand" href="?page=home">
-                    <span class="align-middle">Administrator</span>
+                    <span class="align-middle">Petugas loket</span>
                 </a>
 
                 <ul class="sidebar-nav">

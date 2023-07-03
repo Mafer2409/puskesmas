@@ -1,10 +1,10 @@
-<h1 class="h3 mb-3">Data Admin</h1>
+<h1 class="h3 mb-3">Data petugas loket</h1>
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Data Admin</h5>
+                <h5 class="card-title mb-0">Data petugas loket</h5>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -22,7 +22,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama Admin</th>
+                                <th>Nama petugas loket</th>
                                 <th>E-Mail</th>
                                 <th>Option</th>
                             </tr>
@@ -94,7 +94,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data admin</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data petugas loket</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -102,7 +102,7 @@
             <form action="" method="post">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Nama Admin</label>
+                        <label class="form-label">Nama petugas loket</label>
                         <input class="form-control form-control-lg" type="text" name="admin_nama" placeholder="Nama Lengkap..." required />
                     </div>
                     <div class="mb-3">

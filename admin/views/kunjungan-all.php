@@ -62,7 +62,7 @@
                                 <th>No.</th>
                                 <th>Nama Pasien</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Umur</th>
+                                <th>Tanggal lahir</th>
                                 <th>Poli</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
@@ -83,7 +83,7 @@
                                     <td><?= $no++; ?>.</td>
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
-                                    <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                    <td><?= date('d-m-Y', strtotime($data['kunjungan_pasien_tgl_lahir']))  ?></td>
                                     <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
@@ -154,8 +154,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label class="form-label">Umur Pasien</label>
-                                                        <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" value="<?= $data['kunjungan_pasien_umur'] ?>" placeholder="Umur..." value="18" required />
+                                                        <label class="form-label">Tanggal lahir</label>
+                                                        <input class="form-control form-control-lg" type="date" name="kunjungan_pasien_tgl_lahir" placeholder="Tanggal lahir" value="<?= $data['kunjungan_pasien_tgl_lahir'] ?>" required />
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">Poli</label>
@@ -223,8 +223,8 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Umur Pasien</label>
-                        <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" placeholder="Umur..." value="18" required />
+                        <label class="form-label">Tanggal lahir</label>
+                        <input class="form-control form-control-lg" type="date" name="kunjungan_pasien_tgl_lahir" placeholder="Tanggal lahir" value="<?= date('2000-01-01') ?>" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Poli</label>
@@ -256,7 +256,7 @@
 if (@$_POST['simpan']) {
     $kunjungan_pasien_nama = $_POST['kunjungan_pasien_nama'];
     $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
-    $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
+    $kunjungan_pasien_tgl_lahir = $_POST['kunjungan_pasien_tgl_lahir'];
     $kunjungan_poli_id = $_POST['kunjungan_poli_id'];
     $kunjungan_tanggal = date('Y-m-d');
     $kunjungan_jam = date('h:i:s a');
@@ -264,7 +264,7 @@ if (@$_POST['simpan']) {
     $kunjungan_admin = $idadmin;
     $kunjungan_paramedis = '0';
 
-    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_umur', '$kunjungan_poli_id', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
+    $sql = mysqli_query($con, "INSERT INTO kunjungan VALUES('', '$kunjungan_pasien_nama', '$kunjungan_pasien_jk', '$kunjungan_pasien_tgl_lahir', '$kunjungan_poli_id', '$kunjungan_tanggal', '$kunjungan_jam', '$kunjungan_status', '$kunjungan_admin', '$kunjungan_paramedis')");
 
     if ($sql) {
         echo "<script>alert('Data berhasil ditambah !');window.location='?page=kunjungan';</script>";
@@ -283,13 +283,13 @@ if (@$_POST['save']) {
     $idedit = $_POST['id_edit_kunjungan'];
     $kunjungan_pasien_nama = $_POST['kunjungan_pasien_nama'];
     $kunjungan_pasien_jk = $_POST['kunjungan_pasien_jk'];
-    $kunjungan_pasien_umur = $_POST['kunjungan_pasien_umur'];
+    $kunjungan_pasien_tgl_lahir = $_POST['kunjungan_pasien_tgl_lahir'];
     $kunjungan_poli_id = $_POST['kunjungan_poli_id'];
     $kunjungan_tanggal = date('Y-m-d');
     $kunjungan_jam = date('h:i:s a');
     $kunjungan_admin = $idadmin;
 
-    $sql = mysqli_query($con, "UPDATE kunjungan SET kunjungan_pasien_nama = '$kunjungan_pasien_nama', kunjungan_pasien_jk = '$kunjungan_pasien_jk', kunjungan_pasien_umur = '$kunjungan_pasien_umur', kunjungan_poli_id='$kunjungan_poli_id', kunjungan_tanggal = '$kunjungan_tanggal', kunjungan_jam = '$kunjungan_jam', kunjungan_admin = '$kunjungan_admin' WHERE kunjungan_id = '$idedit'");
+    $sql = mysqli_query($con, "UPDATE kunjungan SET kunjungan_pasien_nama = '$kunjungan_pasien_nama', kunjungan_pasien_jk = '$kunjungan_pasien_jk', kunjungan_pasien_tgl_lahir = '$kunjungan_pasien_tgl_lahir', kunjungan_poli_id='$kunjungan_poli_id', kunjungan_tanggal = '$kunjungan_tanggal', kunjungan_jam = '$kunjungan_jam', kunjungan_admin = '$kunjungan_admin' WHERE kunjungan_id = '$idedit'");
 
     if ($sql) {
         echo "<script>alert('Data berhasil diubah !');window.location='?page=kunjungan';</script>";

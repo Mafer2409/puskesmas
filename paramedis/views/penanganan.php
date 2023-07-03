@@ -23,8 +23,8 @@ $datakunjungan = mysqli_fetch_assoc($sqlkunjungan);
                                 <input class="form-control form-control-lg" type="text" name="kunjungan_pasien_jk" placeholder="Jenis Kelamin..." value="<?= $datakunjungan['kunjungan_pasien_jk'] ?>" required readonly />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Umur Pasien</label>
-                                <input class="form-control form-control-lg" type="number" name="kunjungan_pasien_umur" placeholder="Umur..." value="<?= $datakunjungan['kunjungan_pasien_umur'] ?>" required readonly />
+                                <label class="form-label">Tanggal lahir</label>
+                                <input class="form-control form-control-lg" type="text" name="kunjungan_pasien_tgl_lahir" value="<?= date('d-m-Y', strtotime($datakunjungan['kunjungan_pasien_tgl_lahir'])) ?>" required readonly />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Poli</label>

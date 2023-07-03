@@ -50,7 +50,7 @@ session_destroy();
                                             <label class="form-label">Akses</label>
                                             <select class="form-control form-control-lg" name="akses" required>
                                                 <option value="">-- Pilih Akses --</option>
-                                                <option value="admin">Admin</option>
+                                                <option value="admin">Petugas loket</option>
                                                 <option value="paramedis">Paramedis</option>
                                                 <option value="kepala">Kepala Puskesmas</option>
                                             </select>

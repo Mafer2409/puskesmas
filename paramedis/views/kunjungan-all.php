@@ -36,7 +36,7 @@
                                 <th>No.</th>
                                 <th>Nama Pasien</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Umur</th>
+                                <th>Tanggal lahir</th>
                                 <th>Poli</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
@@ -60,7 +60,7 @@
                                     <td><?= $no++; ?>.</td>
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
-                                    <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                    <td><?= date('d-m-Y', strtotime($data['kunjungan_pasien_tgl_lahir']))  ?></td>
                                     <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
@@ -85,11 +85,9 @@
                                         <?php
                                         } else {
                                         ?>
-                                            <!-- <a href="?page=penanganan&id=<?= $data['kunjungan_id'] ?>" class="text-danger" data-toggle="tooltip" data-placement="top" title="Periksa pasien"><i class="fa fa-plus fa-md"></i></a> -->
                                         <?php
                                         }
                                         ?>
-                                        <!-- <a href="" onclick="return confirm('Yakin ingin menghapus data ini ???')" class="text-danger"><i class="fas fa-trash fa-md"></i></a> -->
                                     </td>
                                 </tr>
                             <?php

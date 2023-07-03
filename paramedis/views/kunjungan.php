@@ -14,7 +14,7 @@
                                 <th>No.</th>
                                 <th>Nama Pasien</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Umur</th>
+                                <th>Tanggal lahir</th>
                                 <th>Poli</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
@@ -38,7 +38,7 @@
                                     <td><?= $no++; ?>.</td>
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
-                                    <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                    <td><?= date('d-m-Y', strtotime($data['kunjungan_pasien_tgl_lahir']))  ?></td>
                                     <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>
@@ -92,7 +92,7 @@
                                 <th>No.</th>
                                 <th>Nama Pasien</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Umur</th>
+                                <th>Tanggal lahir</th>
                                 <th>Poli</th>
                                 <th>Tanggal</th>
                                 <th>Jam</th>
@@ -114,7 +114,7 @@
                                     <td><?= $no++; ?>.</td>
                                     <td><?= $data['kunjungan_pasien_nama']; ?></td>
                                     <td><?= $data['kunjungan_pasien_jk']; ?></td>
-                                    <td><?= $data['kunjungan_pasien_umur']; ?></td>
+                                    <td><?= date('d-m-Y', strtotime($data['kunjungan_pasien_tgl_lahir']))  ?></td>
                                     <td><?= $data['poli_nama']; ?></td>
                                     <td><?= $data['kunjungan_tanggal']; ?></td>
                                     <td><?= $data['kunjungan_jam']; ?></td>

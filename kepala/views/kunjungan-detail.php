@@ -28,9 +28,9 @@ $data = mysqli_fetch_assoc($sql);
                                     <td><?= $data['kunjungan_pasien_jk'] ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Umur Pasien</td>
+                                    <td>Tanggal lahir Pasien</td>
                                     <td>:</td>
-                                    <td><?= $data['kunjungan_pasien_umur'] ?></td>
+                                    <td><?= date('d-m-Y', strtotime($data['kunjungan_pasien_tgl_lahir']))  ?></td>
                                 </tr>
                                 <tr>
                                     <td>Poli</td>
