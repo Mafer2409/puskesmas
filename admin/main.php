@@ -31,7 +31,7 @@ if (!isset($_SESSION['id_admin'])) {
 
     <link rel="stylesheet" href="../assets/datatables/css/lib/datatable/dataTables.bootstrap.min.css">
 
-    <title>Admin - Puskesmas Lewolaga</title>
+    <title>Petugas loket - Puskesmas Lewolaga</title>
 
     <link href="css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
