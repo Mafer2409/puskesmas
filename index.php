@@ -256,7 +256,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="fw-medium text-light" href="#">Puskesmas Lewolaga</a>, All Right Reserved.
+                    &copy; <a class="fw-medium text-light" href="index.php">MF</a>, All Right Reserved.
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <!-- Designed By <a class="fw-medium text-light" href="https://htmlcodex.com">HTML Codex</a>
