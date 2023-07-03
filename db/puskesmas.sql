@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jun 2023 pada 19.07
+-- Waktu pembuatan: 03 Jul 2023 pada 15.58
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -72,7 +72,7 @@ CREATE TABLE `kunjungan` (
   `kunjungan_id` int(11) NOT NULL,
   `kunjungan_pasien_nama` varchar(255) NOT NULL,
   `kunjungan_pasien_jk` varchar(255) NOT NULL,
-  `kunjungan_pasien_umur` int(11) NOT NULL,
+  `kunjungan_pasien_tgl_lahir` date NOT NULL,
   `kunjungan_poli_id` int(11) NOT NULL,
   `kunjungan_tanggal` date NOT NULL,
   `kunjungan_jam` varchar(255) NOT NULL,
@@ -80,6 +80,13 @@ CREATE TABLE `kunjungan` (
   `kunjungan_admin` int(11) NOT NULL,
   `kunjungan_paramedis` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `kunjungan`
+--
+
+INSERT INTO `kunjungan` (`kunjungan_id`, `kunjungan_pasien_nama`, `kunjungan_pasien_jk`, `kunjungan_pasien_tgl_lahir`, `kunjungan_poli_id`, `kunjungan_tanggal`, `kunjungan_jam`, `kunjungan_status`, `kunjungan_admin`, `kunjungan_paramedis`) VALUES
+(22, 'Tes', 'Laki-laki', '2000-01-07', 2, '2023-07-03', '09:03:00 pm', 'Telah Diperiksa', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -116,6 +123,13 @@ CREATE TABLE `penanganan` (
   `penanganan_pengobatan` text NOT NULL,
   `penanganan_ket` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `penanganan`
+--
+
+INSERT INTO `penanganan` (`penanganan_id`, `penanganan_kunjungan`, `penanganan_keluhan`, `penanganan_kesimpulan`, `penanganan_pengobatan`, `penanganan_ket`) VALUES
+(9, 22, 'Tesss', 'Tes tes', 'tesss', '---');
 
 -- --------------------------------------------------------
 
@@ -198,7 +212,7 @@ ALTER TABLE `kepala`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `paramedis`
@@ -210,7 +224,7 @@ ALTER TABLE `paramedis`
 -- AUTO_INCREMENT untuk tabel `penanganan`
 --
 ALTER TABLE `penanganan`
-  MODIFY `penanganan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `penanganan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `poli`
