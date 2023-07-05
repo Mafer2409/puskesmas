@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jul 2023 pada 15.58
+-- Waktu pembuatan: 05 Jul 2023 pada 16.43
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -86,7 +86,11 @@ CREATE TABLE `kunjungan` (
 --
 
 INSERT INTO `kunjungan` (`kunjungan_id`, `kunjungan_pasien_nama`, `kunjungan_pasien_jk`, `kunjungan_pasien_tgl_lahir`, `kunjungan_poli_id`, `kunjungan_tanggal`, `kunjungan_jam`, `kunjungan_status`, `kunjungan_admin`, `kunjungan_paramedis`) VALUES
-(22, 'Tes', 'Laki-laki', '2000-01-07', 2, '2023-07-03', '09:03:00 pm', 'Telah Diperiksa', 1, 1);
+(22, 'Tes', 'Laki-laki', '2000-01-07', 2, '2023-06-03', '09:03:00 pm', 'Telah Diperiksa', 1, 1),
+(27, 'jfdsfkdsf', 'Perempuan', '2000-01-01', 2, '2023-07-05', '07:45:33 pm', 'Telah Diperiksa', 1, 1),
+(28, 'trtrtrtrtrt', 'Perempuan', '2003-09-07', 2, '2023-07-05', '10:28:35 pm', 'Telah Diperiksa', 1, 1),
+(29, 'Harmoni', 'Perempuan', '1990-10-10', 2, '2023-07-05', '08:01:36 pm', 'Telah Diperiksa', 1, 1),
+(30, 'Te tessss new', 'Laki-laki', '1997-12-30', 4, '2023-07-05', '10:29:02 pm', 'Belum Diperiksa', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -129,7 +133,10 @@ CREATE TABLE `penanganan` (
 --
 
 INSERT INTO `penanganan` (`penanganan_id`, `penanganan_kunjungan`, `penanganan_keluhan`, `penanganan_kesimpulan`, `penanganan_pengobatan`, `penanganan_ket`) VALUES
-(9, 22, 'Tesss', 'Tes tes', 'tesss', '---');
+(9, 22, 'Tesss', 'Tes tes', 'tesss', '---'),
+(10, 27, 'vcxvcxvcxvcxvcxvxcv', 'vxcvcxvcx', 'vdfxvdfsgdfgdf', 'gdfgdf'),
+(11, 29, 'dsfdsfdsf', 'sdfdsf', 'sdfdsfsd', 'ds'),
+(12, 28, 'gfgf', 'vcvv', 'vdfvfdv', 'h');
 
 -- --------------------------------------------------------
 
@@ -172,7 +179,10 @@ ALTER TABLE `kepala`
 -- Indeks untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  ADD PRIMARY KEY (`kunjungan_id`);
+  ADD PRIMARY KEY (`kunjungan_id`),
+  ADD KEY `kunjungan_paramedis` (`kunjungan_paramedis`),
+  ADD KEY `kunjungan_admin` (`kunjungan_admin`),
+  ADD KEY `kunjungan_poli_id` (`kunjungan_poli_id`);
 
 --
 -- Indeks untuk tabel `paramedis`
@@ -184,7 +194,8 @@ ALTER TABLE `paramedis`
 -- Indeks untuk tabel `penanganan`
 --
 ALTER TABLE `penanganan`
-  ADD PRIMARY KEY (`penanganan_id`);
+  ADD PRIMARY KEY (`penanganan_id`),
+  ADD KEY `penanganan_kunjungan` (`penanganan_kunjungan`);
 
 --
 -- Indeks untuk tabel `poli`
@@ -212,7 +223,7 @@ ALTER TABLE `kepala`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `kunjungan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `paramedis`
@@ -224,13 +235,30 @@ ALTER TABLE `paramedis`
 -- AUTO_INCREMENT untuk tabel `penanganan`
 --
 ALTER TABLE `penanganan`
-  MODIFY `penanganan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `penanganan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `poli`
 --
 ALTER TABLE `poli`
   MODIFY `poli_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `kunjungan`
+--
+ALTER TABLE `kunjungan`
+  ADD CONSTRAINT `kunjungan_ibfk_1` FOREIGN KEY (`kunjungan_admin`) REFERENCES `admin` (`admin_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `kunjungan_ibfk_2` FOREIGN KEY (`kunjungan_poli_id`) REFERENCES `poli` (`poli_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ketidakleluasaan untuk tabel `penanganan`
+--
+ALTER TABLE `penanganan`
+  ADD CONSTRAINT `penanganan_ibfk_1` FOREIGN KEY (`penanganan_kunjungan`) REFERENCES `kunjungan` (`kunjungan_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
